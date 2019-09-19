@@ -22,7 +22,7 @@ struct nodo_archivo{
 
 
 
-sistema createSistema(){
+sistema CREATESISTEMA(){
 	return NULL;
 }
 
@@ -38,6 +38,8 @@ TipoRet CREATERAIZ(sistema &s){
     return ERROR;
   }
 }
+
+//---------------------------------------TIPO 1 (IMPRESCINDIBLES)
 
 TipoRet CREATEARCHIVO (sistema &s, char *nombreArchivo){
   if (buscaNombre(s->d->a, nombreArchivo)){
@@ -73,7 +75,27 @@ bool buscaNombre (archivo a, char *nombre){
     return false;
   }
 }
+
+
+TipoRet IF (sistema &s, char *nombreArchivo, char *texto){
+  return NO_IMPLEMENTADA;
+}
+
+	
+TipoRet TYPE (sistema &s, char *nombreArchivo){
+  return NO_IMPLEMENTADA;
+}
+
+//---------------------------------------TIPO 2
 TipoRet DELETE (sistema &s, char *nombreArchivo){
+  return NO_IMPLEMENTADA;
+}
+
+TipoRet BF (sistema &s, char *nombreArchivo, int k){
+  return NO_IMPLEMENTADA;
+}
+
+TipoRet CAT (Sistema &s, string nombreArchivo1, char *nombreArchivo2){
   return NO_IMPLEMENTADA;
 }
 
@@ -81,19 +103,9 @@ TipoRet DIR (sistema &s , char *parametro){
   return NO_IMPLEMENTADA;
 }
 
+//--------------------------------------TIPO 3
+
 TipoRet IC (sistema &s, char *nombreArchivo, char *texto){
-  return NO_IMPLEMENTADA;
-}
-
-TipoRet IF (sistema &s, char *nombreArchivo, char *texto){
-  return NO_IMPLEMENTADA;
-}
-
-TipoRet TYPE (sistema &s, char *nombreArchivo){
-  return NO_IMPLEMENTADA;
-}
-
-TipoRet BF (sistema &s, char *nombreArchivo, int k){
   return NO_IMPLEMENTADA;
 }
 
