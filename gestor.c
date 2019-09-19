@@ -9,20 +9,18 @@ struct nodo_sistema{
 };
 
 struct nodo_directorio{
-  string nombre;
+  char *nombre;
   archivo a;
 };
 
 struct nodo_archivo{
-  string nombre;
-  string texto;
+  char *nombre;
+  char *texto;
   int tamanio;
   archivo sig;
 };
 
-enum retorno{
-  OK, ERROR, NO_IMPLEMENTADA
-};
+
 
 sistema createSistema(){
 	return NULL;
@@ -32,8 +30,8 @@ TipoRet createRaiz(sistema &s){
   if (s == NULL){
     s = new (nodo_sistema);
     s->d = new (nodo_directorio);
-    s->d->nombre = "/"
-    s->d->archivo = NULL;
+    strcpy(s->d->nombre, "/");
+    s->d->a = NULL;
     return OK;
   }
   else{
@@ -41,11 +39,11 @@ TipoRet createRaiz(sistema &s){
   }
 }
 
-TipoRet createArchivo (Sistema &s, string nombreArchivo){
+TipoRet createArchivo (sistema &s, char *nombreArchivo){
   if (buscaNombre(s->d->a, nombreArchivo)){
       if(s->d->a == NULL){
         archivo aux = new (nodo_archivo);
-        aux -> nombre = nombreArchivo;
+        strcpy(aux -> nombre, nombreArchivo);
         aux -> sig = NULL;
         return OK;
       }
@@ -55,8 +53,8 @@ TipoRet createArchivo (Sistema &s, string nombreArchivo){
       while (aux->sig != NULL){
         aux = aux->sig;
       }
-      aux2 = new (nodo_archivo);
-      aux2 -> nombre = nombreArchivo;
+      archivo aux2 = new (nodo_archivo);
+      strcpy(aux2 -> nombre, nombreArchivo);
       aux -> sig = aux2;
       delete aux;
       return OK;
@@ -66,43 +64,39 @@ TipoRet createArchivo (Sistema &s, string nombreArchivo){
     return ERROR;
 }
 
-bool buscaNombre (archivo a, string nombre){
-  if (s == NULL)
+bool buscaNombre (archivo a, char *nombre){
+  if (a == NULL)
     return true;
-  else if (a->nombre != nombre)
+  else if (strcmp(a->nombre, nombre) != 0)
     return buscaNombre(a->sig,nombre);
   else {
     return false;
   }
 }
-TipoRet delete (sistema &s, string nombreArchivo){
+TipoRet DELETE (sistema &s, char *nombreArchivo){
   return NO_IMPLEMENTADA;
 }
 
-TipoRet dir (sistema &s , string parametro){
+TipoRet DIR (sistema &s , char *parametro){
   return NO_IMPLEMENTADA;
 }
 
-TipoRet ic (sistema &s, string nombreArchivo, string texto){
+TipoRet IC (sistema &s, char *nombreArchivo, char *texto){
   return NO_IMPLEMENTADA;
 }
 
-TipoRet if (sistema &s, string nombreArchivo, string texto){
+TipoRet IF (sistema &s, char *nombreArchivo, char *texto){
   return NO_IMPLEMENTADA;
 }
 
-TipoRet type (sistema &s, string nombreArchivo){
+TipoRet TYPE (sistema &s, char *nombreArchivo){
   return NO_IMPLEMENTADA;
 }
 
-TipoRet bf (sistema &s, string nombreArchivo, int k){
+TipoRet BF (sistema &s, char *nombreArchivo, int k){
   return NO_IMPLEMENTADA;
 }
 
-TipoRet bc (sistema &s, string nombreArchivo, int k){
-  return NO_IMPLEMENTADA;
-}
-
-bool buscaNombre (sistema s, string nombre){
+TipoRet BC (sistema &s, char *nombreArchivo, int k){
   return NO_IMPLEMENTADA;
 }
