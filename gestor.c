@@ -26,7 +26,7 @@ sistema createSistema(){
 	return NULL;
 }
 
-TipoRet createRaiz(sistema &s){
+TipoRet CREATERAIZ(sistema &s){
   if (s == NULL){
     s = new (nodo_sistema);
     s->d = new (nodo_directorio);
@@ -39,7 +39,7 @@ TipoRet createRaiz(sistema &s){
   }
 }
 
-TipoRet createArchivo (sistema &s, char *nombreArchivo){
+TipoRet CREATEARCHIVO (sistema &s, char *nombreArchivo){
   if (buscaNombre(s->d->a, nombreArchivo)){
       if(s->d->a == NULL){
         archivo aux = new (nodo_archivo);
