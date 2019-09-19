@@ -1,16 +1,15 @@
-#include "gestor.h"
 #include <string.h>
 #include <stdio.h>
 #include <iostream>
-
-
-struct nodo_sistema{
-  directorio d;
-};
+#include "gestor.h"
 
 struct nodo_directorio{
   char *nombre;
   archivo a;
+};
+
+struct nodo_sistema{
+  directorio d;
 };
 
 struct nodo_archivo{
@@ -20,28 +19,26 @@ struct nodo_archivo{
   archivo sig;
 };
 
-
-
-sistema CREATESISTEMA(){
+sistema createSistema(){
 	return NULL;
 }
 
-TipoRet CREATERAIZ(sistema &s){
-  if (s == NULL){
+TipoRet createRaiz(sistema &s){
+  //if (s == NULL){
+    directorio dirAUX = new (nodo_directorio);
+    dirAUX->nombre = new char[strlen("/") + 1];
+    strcpy(dirAUX->nombre, "/");
+    dirAUX->a = NULL;
     s = new (nodo_sistema);
-    s->d = new (nodo_directorio);
-    strcpy(s->d->nombre, "/");
-    s->d->a = NULL;
+    s->d = dirAUX;
     return OK;
-  }
-  else{
-    return ERROR;
-  }
+  //}
+  //else{
+    //return ERROR;
+  //}
 }
 
-//---------------------------------------TIPO 1 (IMPRESCINDIBLES)
-
-TipoRet CREATEARCHIVO (sistema &s, char *nombreArchivo){
+TipoRet createArchivo (sistema &s, char *nombreArchivo){
   if (buscaNombre(s->d->a, nombreArchivo)){
       if(s->d->a == NULL){
         archivo aux = new (nodo_archivo);
@@ -75,27 +72,7 @@ bool buscaNombre (archivo a, char *nombre){
     return false;
   }
 }
-
-
-TipoRet IF (sistema &s, char *nombreArchivo, char *texto){
-  return NO_IMPLEMENTADA;
-}
-
-	
-TipoRet TYPE (sistema &s, char *nombreArchivo){
-  return NO_IMPLEMENTADA;
-}
-
-//---------------------------------------TIPO 2
 TipoRet DELETE (sistema &s, char *nombreArchivo){
-  return NO_IMPLEMENTADA;
-}
-
-TipoRet BF (sistema &s, char *nombreArchivo, int k){
-  return NO_IMPLEMENTADA;
-}
-
-TipoRet CAT (Sistema &s, string nombreArchivo1, char *nombreArchivo2){
   return NO_IMPLEMENTADA;
 }
 
@@ -103,9 +80,19 @@ TipoRet DIR (sistema &s , char *parametro){
   return NO_IMPLEMENTADA;
 }
 
-//--------------------------------------TIPO 3
-
 TipoRet IC (sistema &s, char *nombreArchivo, char *texto){
+  return NO_IMPLEMENTADA;
+}
+
+TipoRet IF (sistema &s, char *nombreArchivo, char *texto){
+  return NO_IMPLEMENTADA;
+}
+
+TipoRet TYPE (sistema &s, char *nombreArchivo){
+  return NO_IMPLEMENTADA;
+}
+
+TipoRet BF (sistema &s, char *nombreArchivo, int k){
   return NO_IMPLEMENTADA;
 }
 

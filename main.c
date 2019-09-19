@@ -3,15 +3,15 @@
 #include <stdlib.h>
 #include <iostream>
 
-//#include "gestor.h"
+#include "gestor.h"
 
 using namespace std;
 
 int main(){
-
-  printf("HOLA MUNDO");
-
-  //sistema s = createSistema();
-  //createRaiz(s);
+  sistema s = createSistema();
+  createRaiz(s);
+  directorio aux = new (nodo_directorio);
+  aux->a = NULL;
+  aux = s->d;
+  printf("Carpeta raíz: %s ", aux->nombre);
 }
-return 0;
