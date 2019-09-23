@@ -19,11 +19,11 @@ struct nodo_archivo{
   archivo sig;
 };
 
-sistema createSistema(){
+sistema CREATESISTEMA(){
 	return NULL;
 }
 
-TipoRet createRaiz(sistema &s){
+TipoRet CREATERAIZ(sistema &s){
   //if (s == NULL){
     directorio dirAUX = new (nodo_directorio);
     dirAUX->nombre = new char[strlen("/") + 1];
@@ -38,7 +38,7 @@ TipoRet createRaiz(sistema &s){
   //}
 }
 
-TipoRet createArchivo (sistema &s, char *nombreArchivo){
+TipoRet CREATEARCHIVO (sistema &s, char *nombreArchivo){
   if (buscaNombre(s->d->a, nombreArchivo)){
       if(s->d->a == NULL){
         archivo aux = new (nodo_archivo);
@@ -55,13 +55,82 @@ TipoRet createArchivo (sistema &s, char *nombreArchivo){
       archivo aux2 = new (nodo_archivo);
       strcpy(aux2 -> nombre, nombreArchivo);
       aux -> sig = aux2;
-      delete aux;
       return OK;
       }
   }
   else
     return ERROR;
 }
+
+
+//------------------------------------------------------------------------
+
+TipoRet IF (sistema &s, char *nombreArchivo, char *texto){
+  return NO_IMPLEMENTADA;
+}
+
+//------------------------------------------------------------------------
+
+TipoRet TYPE (sistema &s, char *nombreArchivo){
+  return NO_IMPLEMENTADA;
+}
+
+//------------------------------------------------------------------------
+
+TipoRet DIR (sistema &s , char *parametro){
+  sistema aux = s->d
+  if (aux!= NULL)
+    cout << aux->nombre << "\t Directorio \n";
+  else
+    return ERROR;
+  aux = aux->a;
+  while (aux != NULL){
+    cout << aux->nombre << "\t Archivo \t" << aux->tamanio "\n";
+    aux = aux->sig;
+  }
+  return OK;
+
+  return NO_IMPLEMENTADA;
+}
+
+//------------------------------------------------------------------------
+
+TipoRet DELETE (sistema &s, char *nombreArchivo){
+  if (buscaNombre(s->d->a, nombreArchivo)){
+      archivo aux;
+      archivo aux2;
+      aux = buscaArchivo(s->d->a, nombreArchivo);
+      aux2 = aux->sig;
+      aux -> sig = aux2->sig;
+      delete aux2;
+      return OK;
+  }
+  else return ERROR;
+  return NO_IMPLEMENTADA;
+}
+
+//------------------------------------------------------------------------
+
+TipoRet BF (sistema &s, char *nombreArchivo, int k){
+  return NO_IMPLEMENTADA;
+}
+
+//------------------------------------------------------------------------
+
+TipoRet IC (sistema &s, char *nombreArchivo, char *texto){
+  return NO_IMPLEMENTADA;
+}
+
+//------------------------------------------------------------------------
+
+TipoRet BC (sistema &s, char *nombreArchivo, int k){
+  return NO_IMPLEMENTADA;
+}
+
+//------------------------------------------------------------------------
+//---------------------------AUXILIARES-----------------------------------
+//------------------------------------------------------------------------
+
 
 bool buscaNombre (archivo a, char *nombre){
   if (a == NULL)
@@ -72,30 +141,12 @@ bool buscaNombre (archivo a, char *nombre){
     return false;
   }
 }
-TipoRet DELETE (sistema &s, char *nombreArchivo){
-  return NO_IMPLEMENTADA;
-}
+//------------------------------------------------------------------------
 
-TipoRet DIR (sistema &s , char *parametro){
-  return NO_IMPLEMENTADA;
+archivo buscaArchivo (archivo a, char *nombre){
+  if (a->nombre != nombre)
+    buscaArchivo (a->sig, nombre);
+  else
+    return a;
 }
-
-TipoRet IC (sistema &s, char *nombreArchivo, char *texto){
-  return NO_IMPLEMENTADA;
-}
-
-TipoRet IF (sistema &s, char *nombreArchivo, char *texto){
-  return NO_IMPLEMENTADA;
-}
-
-TipoRet TYPE (sistema &s, char *nombreArchivo){
-  return NO_IMPLEMENTADA;
-}
-
-TipoRet BF (sistema &s, char *nombreArchivo, int k){
-  return NO_IMPLEMENTADA;
-}
-
-TipoRet BC (sistema &s, char *nombreArchivo, int k){
-  return NO_IMPLEMENTADA;
-}
+//------------------------------------------------------------------------
