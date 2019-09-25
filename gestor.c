@@ -72,7 +72,16 @@ TipoRet IF (sistema &s, char *nombreArchivo, char *texto){
 //------------------------------------------------------------------------
 
 TipoRet TYPE (sistema &s, char *nombreArchivo){
-  return NO_IMPLEMENTADA;
+	sistema aux = s->d->a; 
+	if (!buscaArchivo(aux, nombreArchivo))
+		return ERROR;
+	else
+		while (aux != nombre archivo){
+			aux = aux->sig;	
+		}
+		cout << aux->texto \n;
+		return OK;
+	return NO_IMPLEMENTADA;
 }
 
 //------------------------------------------------------------------------
