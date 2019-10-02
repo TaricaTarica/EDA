@@ -26,12 +26,12 @@ archivo insert_Archivo(archivo a, char *nArchivo){
     }
 }
 void print_Archivo(archivo a){
-  archivo aux = a;
-  while(aux->sig != NULL){
-    printf("- %s", aux->nombreArchivo);
-    printf("\n");
-    aux = aux->sig;
+  if(a != NULL){
+    archivo aux = a;
+      while(aux->sig != NULL){
+        printf("- %s", aux->nombreArchivo);
+        printf("\n");
+        aux = aux->sig;
+      }
   }
-
-
 }
