@@ -7,7 +7,7 @@
 
 #include "define.h"
 
-typedef struct nodo_linea * Linea;
+typedef struct nodo_linea * linea;
 
 linea insertaLinea (linea ln, char *nombreArchivo, char *texto);
 
