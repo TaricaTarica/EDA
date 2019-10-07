@@ -25,6 +25,7 @@ directorio create_Raiz(directorio d){
     return d;
 }
 
+//---------------------------------------------------------------------
 
 directorio insert_Directorio(directorio d, char *nDirectorio){
     if(d == NULL){
@@ -41,6 +42,8 @@ directorio insert_Directorio(directorio d, char *nDirectorio){
     }
 }
 
+//---------------------------------------------------------------------
+
 void print_Directorio(directorio d){
   directorio dirAUX = d;
   archivo arAUX = dirAUX->a;
@@ -54,5 +57,6 @@ void print_Directorio(directorio d){
     printf("\n");
     dirAUX = dirAUX->sig;
   }
-
 }
+
+//---------------------------------------------------------------------

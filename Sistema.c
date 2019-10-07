@@ -9,6 +9,7 @@
 
 struct nodoSistema{
     directorio d;
+    //direcotrioActual da;
 };
 
 Sistema create_Sistema(){
@@ -16,6 +17,8 @@ Sistema create_Sistema(){
   s->d = NULL;
   return s;
 }
+
+//---------------------------------------------------------------------
 
 TipoRet DIR (Sistema &s){
     if(s == NULL)
@@ -31,7 +34,10 @@ TipoRet DIR (Sistema &s){
       }
     }
 }
-TipoRet CREATE (Sistema &s, char *nombreArchivo){
+
+//---------------------------------------------------------------------
+
+TipoRet CREATE (Sistema &s, char *nombreArchivo, int tamanio){
   if(s == NULL)
     return ERROR;
   else{
@@ -42,7 +48,76 @@ TipoRet CREATE (Sistema &s, char *nombreArchivo){
     else{
       directorio dirAUX = sisAUX->d;
       archivo arAUX = dirAUX->a;
-      dirAUX->a = insert_Archivo(arAUX, nombreArchivo);
+      arAUX = insert_Archivo(arAUX, nombreArchivo, tamanio); //porq no usas arAux en vez de  dirAUX->a? - no me había dado cuenta, arreglado.
+      return OK;
+    }
+  }
+}
+
+//---------------------------------------------------------------------
+
+TipoRet IF (Sistema &s, char *nombreArchivo, char *texto){
+  if(s == NULL)
+    return ERROR;
+  else{
+    Sistema sisAUX = s;
+    if(sisAUX->d == NULL){
+      return ERROR;
+    }
+    else{
+      directorio dirAUX = sisAUX->d;
+      archivo arAUX = dirAUX->a;
+      arAUX = buscaArchivo(arAUX, nombreArchivo);
+      if (arAUX != NULL){
+        insertaEnArchivo (arAUX, nombreArchivo, texto);
+        return OK;
+      }
+      else
+        return ERROR;
+    }
+  }
+}
+
+//---------------------------------------------------------------------
+
+TipoRet TYPE (Sistema &s, char *nombreArchivo){
+
+  if(s == NULL)
+    return ERROR;
+  else{
+    Sistema sisAUX = s;
+    if(sisAUX->d == NULL){
+      return ERROR;
+    }
+    else{
+      directorio dirAUX = sisAUX->d;
+      archivo arAUX = dirAUX->a;
+      arAUX = buscaArchivo(arAUX, nombreArchivo);
+      if (arAUX != NULL){
+      linea lnAUX = arAUX->cont;
+        imprimirLineas (lnAUX);
+        return OK;
+      }
+      else
+        return ERROR;
+    }
+  }
+}
+
+//---------------------------------------------------------------------
+
+TipoRet DELETE (Sistema &s, char *nombreArchivo){
+  if(s == NULL)
+    return ERROR;
+  else{
+    Sistema sisAUX = s;
+    if(sisAUX->d == NULL){
+      return ERROR;
+    }
+    else{
+      directorio dirAUX = sisAUX->d;
+      archivo arAUX = dirAUX->a;
+      arAUX = eliminar_Archivo(arAUX, nombreArchivo);
       return OK;
     }
   }
