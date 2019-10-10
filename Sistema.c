@@ -122,3 +122,41 @@ TipoRet DELETE (Sistema &s, char *nombreArchivo){
     }
   }
 }
+
+//---------------------------------------------------------------------
+
+TipoRet BF (Sistema &s, string nombreArchivo, int k){
+  if(s == NULL)
+    return ERROR;
+  else{
+    Sistema sisAUX = s;
+    if(sisAUX->d == NULL){
+      return ERROR;
+    }
+    else{
+      directorio dirAUX = sisAUX->d;
+      archivo arAUX = dirAUX->a;
+      arAUX = eliminar_CantLineas(arAUX, nombreArchivo, k);
+      return OK;
+    }
+  }
+}
+
+//---------------------------------------------------------------------
+
+TipoRet CAT (Sistema &s, string nombreArchivo1, string nombreArchivo2){
+  if(s == NULL)
+    return ERROR;
+  else{
+    Sistema sisAUX = s;
+    if(sisAUX->d == NULL){
+      return ERROR;
+    }
+    else{
+      directorio dirAUX = sisAUX->d;
+      archivo arAUX = dirAUX->a;
+      arAUX = Concat(arAUX, nombreArchivo1, nombreArchivo2);
+      return OK;
+    }
+  }
+}

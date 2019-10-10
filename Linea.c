@@ -46,3 +46,27 @@ void imprimirLineas (linea ln){
     }
   }
 }
+
+//---------------------------------------------------------------------
+
+void borrarLineas (linea ln, int cant){
+
+  if (ln == NULL)
+    return 0;
+  else{ if(ln != NULL)
+    borrarLineas (ln->sig);
+  }
+  ln->l = NULL;
+  ln->sig = NULL;
+  delete ln;
+}
+
+//---------------------------------------------------------------------
+
+linea avanzaEnLineas (linea ln){
+  ln = ln->sig;
+}
+//---------------------------------------------------------------------
+char* devuelveContenidodeLinea (linea ln){
+  return ln->l
+}
