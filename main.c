@@ -7,6 +7,9 @@
 
 using namespace std;
 
+#define MAX_COMANDO 25
+#define MAX_PARAMETRO 255
+
 int main(){
 	Sistema s = CREAR_SISTEMA();
 	bool salir = false;
@@ -73,3 +76,7 @@ int main(){
 	delete [] parametro1;
   return 0;
 }
+
+/* CREO QUE EN EL DEFINE VA ESTO, NO LO QUISE MODIFICAR. MODIFICO TODO ACA EN EL MAIN. REVISEN.
+#define MAX_COMANDO 25
+#define MAX_PARAMETRO 255
