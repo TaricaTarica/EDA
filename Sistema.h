@@ -9,6 +9,10 @@
 
 typedef struct nodoSistema * Sistema;
 
+
+Sistema create_Sistema();
+//crea un sistema vacío.
+
 TipoRet DIR (Sistema &s);
 //Este comando muestra el contenido del directorio actual, ya sean subdirectorios o archivos.
 
@@ -18,17 +22,17 @@ TipoRet CREATE (Sistema &s, char *nombreArchivo);
 TipoRet IF (Sistema &s, char *nombreArchivo, char *texto);
 //Inserta una línea al final del texto del archivo NombreArchivo
 
-TipoRet TYPE (Sistema &s, char *nombreArchivo)
+TipoRet TYPE (Sistema &s, char *nombreArchivo);
 //Muestra por pantalla el contenido del archivo NombreArchivo
 
 TipoRet DELETE (Sistema &s, char *nombreArchivo);
 //Este comando elimina un archivo del Sistema de Archivos. El archivo a ser borrado puede ser especificado mediante una ruta relativa o absoluta.
 
-TipoRet BF (Sistema &s, string nombreArchivo, int k);
+TipoRet BF (Sistema &s, char *nombreArchivo, int k);
 //Borra, a lo sumo, las k últimas líneas de texto del archivo NombreArchivo. Si el texto tiene k o
 //menos líneas, éste queda vacío.
 
-TipoRet CAT (Sistema &s, string nombreArchivo1, string nombreArchivo2);
+TipoRet CAT (Sistema &s, char *nombreArchivo1, char *nombreArchivo2);
 //Concatena el archivo de nombre NombreArchivo2 a continuación del archivo de nombre
 //NombreArchivo1, dejando el contenido del archivo resultante en el archivo NombreArchivo1
 

@@ -9,7 +9,7 @@
 struct nodoDirectorio{
     char *nombreDirectorio;
     archivo a;
-    nodoDirectorio *sig;
+    directorio sig;
 };
 
 directorio create_Raiz(directorio d){

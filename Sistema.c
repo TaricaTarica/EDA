@@ -3,9 +3,9 @@
 
 #include "Sistema.h"
 #include "define.h"
-#include "Directorio.h"
 #include "Archivo.h"
-
+#include "Directorio.h"
+#include "Linea.h"
 
 struct nodoSistema{
     directorio d;
@@ -125,7 +125,7 @@ TipoRet DELETE (Sistema &s, char *nombreArchivo){
 
 //---------------------------------------------------------------------
 
-TipoRet BF (Sistema &s, string nombreArchivo, int k){
+TipoRet BF (Sistema &s, char *nombreArchivo, int k){
   if(s == NULL)
     return ERROR;
   else{
@@ -144,7 +144,7 @@ TipoRet BF (Sistema &s, string nombreArchivo, int k){
 
 //---------------------------------------------------------------------
 
-TipoRet CAT (Sistema &s, string nombreArchivo1, string nombreArchivo2){
+TipoRet CAT (Sistema &s, char *nombreArchivo1, char *nombreArchivo2){
   if(s == NULL)
     return ERROR;
   else{

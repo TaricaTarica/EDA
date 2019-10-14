@@ -50,12 +50,8 @@ void imprimirLineas (linea ln){
 //---------------------------------------------------------------------
 
 void borrarLineas (linea ln, int cant){
-
-  if (ln == NULL)
-    return 0;
-  else{ if(ln != NULL)
-    borrarLineas (ln->sig);
-  }
+  if(ln != NULL)
+    borrarLineas (ln->sig, cant);
   ln->l = NULL;
   ln->sig = NULL;
   delete ln;
@@ -64,9 +60,9 @@ void borrarLineas (linea ln, int cant){
 //---------------------------------------------------------------------
 
 linea avanzaEnLineas (linea ln){
-  ln = ln->sig;
+  return ln->sig;
 }
 //---------------------------------------------------------------------
 char* devuelveContenidodeLinea (linea ln){
-  return ln->l
+  return ln->l;
 }

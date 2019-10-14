@@ -3,7 +3,6 @@
 
 #include "Archivo.h"
 #include "define.h"
-#include "Linea.h"
 
 struct nodoArchivo{
   char *nombreArchivo;
@@ -61,7 +60,7 @@ archivo insertaEnArchivo (archivo a, char *nombreArchivo, char *texto){
   if (cantLineas(lnAUX) < arAUX->max)
     insertaLinea (lnAUX, nombreArchivo, texto);
   else
-    cout << "Error: El texto es mayor al soportado por el archivo";
+    printf("Error: El texto es mayor al soportado por el archivo");
   return a;
 }
 
@@ -80,6 +79,7 @@ archivo eliminar_Archivo(archivo a, char *nombreArchivo){
       a->sig = eliminar_Archivo(a->sig, nombreArchivo);
       return a;
     }
+    return a;///
 }
 
 //---------------------------------------------------------------------
@@ -88,26 +88,27 @@ archivo eliminar_CantLineas (archivo a, char *nombreArchivo, int k){
 
   archivo arAUX = buscaArchivo (a, nombreArchivo);//cambie los arAUX = a por busca archivo
   borrarLineas (arAUX->cont, k);
-  cout << "lineas borradas";
+  printf("lineas borradas");
   return a;
 }
 
 //---------------------------------------------------------------------
 
 archivo Concat(archivo a, char *nombreArchivo1, char *nombreArchivo2){
-
   archivo arAUX = a;
   archivo arAUX1 = buscaArchivo (arAUX, nombreArchivo1);//busca y asigna el asrchivo a cada variable
   archivo arAUX2 = buscaArchivo (arAUX, nombreArchivo2);
   if (arAUX1 == NULL){
-    cout << "el archivo 1 no existe";
+    printf("el archivo 1 no existe");
     return a;
   }
   if (arAUX2 == NULL){
-    cout << "el archivo 2 no existe";
+    printf("el archivo 2 no existe");
     return a;
   }
   while (arAUX2->cont != NULL){
-  insertaEnArchivo (arAUX1, nombreArchivo1, devuelveContenidodeLinea(arAUX2->cont));//hace un control innecesario despues (busca archivo denuevo), pero creo q no pasa nada
-  arAUX2->cont = avanzaEnLineas(arAUX->cont);//la idea es q avance el puntero en el contenido para mostrar el char q sigue en la lisa y asi ir metiendolos de a uno
-}//el devuelve contenido de linea es porq necesito poner un char para reutilizar la funcion de inserta en archivo
+    insertaEnArchivo (arAUX1, nombreArchivo1, devuelveContenidodeLinea(arAUX2->cont));//hace un control innecesario despues (busca archivo denuevo), pero creo q no pasa nada
+    arAUX2->cont = avanzaEnLineas(arAUX->cont);//la idea es q avance el puntero en el contenido para mostrar el char q sigue en la lisa y asi ir metiendolos de a uno
+  }//el devuelve contenido de linea es porq necesito poner un char para reutilizar la funcion de inserta en archivo
+return a;/// para que compile
+}

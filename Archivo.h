@@ -10,7 +10,6 @@
 
 typedef struct nodoArchivo * archivo;
 
-
 archivo insert_Archivo(archivo a, char *nArchivo, int tamanio);
 //crea el archivo a insertar en el Directorio
 
@@ -29,6 +28,6 @@ archivo eliminar_Archivo(archivo a, char *nombreArchivo);
 archivo eliminar_CantLineas (archivo a, char *nombreArchivo, int k);
 //elimina cierta cantidad de lineas del archivo nombreArchivo
 
-archivo Concat(archivo a, char *nombreArchivo1, char *nombreArchivo2)
+archivo Concat(archivo a, char *nombreArchivo1, char *nombreArchivo2);
 //inserta las lineas de nombreArchivo2 al final de nombreArchivo1, o eso intenté
 #endif
