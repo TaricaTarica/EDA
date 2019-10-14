@@ -1,10 +1,21 @@
-TipoRet DELETE (Sistema & s, string nombreArchivo){
-// Elimina un archivo del Sistema de Archivos. El archivo
-// a ser borrado puede ser especificado mediante una ruta relativa
-// o absoluta.
-// Retorna OK si se pudo eliminar el archivo exitosamente.
-// Retorna ERROR si no existe un archivo con ese nombre en
-// el directorio  actual.
-	return DELETE_ARCHIVO_DIR (s->actual, nombreArchivo);
+TipoRet DELETE_ARCHIVO_ARCHIVOS(archivos & as, char * nombreArchivo){
+// Elimina un archivo del conjunto de archivos
+	char * nombre, * ext;
+	nombre = strtok (nombreArchivo,".");
+	if (nombre != NULL){
+		ext = strtok (NULL, ".");
+		if (ext == NULL){// si no tiene extencion, crea una vacía
+			ext = new(char[strlen("")]);
+			strcpy(ext, "");
+		}
+	}
+	if (PERTENECE_ARCHIVO_ARCHIVOS (as, nombre, extension)){
+		as = BORRAR_ARCHIVO_ARCHIVOS(as, nombre, extension);
+		printf("\nArchivo eliminado con exito.\n");
+		return OK;
+	}else{
+		printf("\nEl archivo no existe.\n");
+		return ERROR;
+	}
 }
 
