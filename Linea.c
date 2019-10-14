@@ -22,8 +22,10 @@ linea insertaLinea (linea ln, char *texto){
     aux->sig = NULL;
     return aux;
   }
-  else
-    return insertaLinea (ln->sig, texto); //ln->sig = insertaLinea (ln->sig, texto); así estaba antes
+  else{
+    ln->sig = insertaLinea (ln->sig, texto);
+    return ln;
+  }
 }
 
 //---------------------------------------------------------------------
