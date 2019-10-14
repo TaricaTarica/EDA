@@ -1,1 +1,10 @@
+TipoRet DELETE (Sistema & s, string nombreArchivo){
+// Elimina un archivo del Sistema de Archivos. El archivo
+// a ser borrado puede ser especificado mediante una ruta relativa
+// o absoluta.
+// Retorna OK si se pudo eliminar el archivo exitosamente.
+// Retorna ERROR si no existe un archivo con ese nombre en
+// el directorio  actual.
+	return DELETE_ARCHIVO_DIR (s->actual, nombreArchivo);
+}
 
