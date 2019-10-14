@@ -3,9 +3,9 @@
 
 #include "Sistema.h"
 #include "define.h"
+#include "Linea.h"
 #include "Archivo.h"
 #include "Directorio.h"
-#include "Linea.h"
 
 struct nodoSistema{
     directorio d;

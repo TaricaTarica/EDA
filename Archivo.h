@@ -6,7 +6,6 @@
 #include <string.h>
 
 #include "define.h"
-#include "Linea.h"
 
 typedef struct nodoArchivo * archivo;
 

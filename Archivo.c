@@ -2,6 +2,7 @@
 #include <stdio.h>
 
 #include "Archivo.h"
+#include "Linea.h"
 #include "define.h"
 
 struct nodoArchivo{
