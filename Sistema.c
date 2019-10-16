@@ -15,21 +15,23 @@ struct nodoSistema{
 Sistema create_Sistema(){
   Sistema s = new(nodoSistema);
   s->d = NULL;
+  s->d = create_Raiz(s->d);
   return s;
 }
 
 //---------------------------------------------------------------------
 
 TipoRet DIR (Sistema &s){
-    if(s == NULL)
+    if(s == NULL){
       return ERROR;
+    }
     else{
       Sistema sisAUX = s;
       if(sisAUX->d == NULL)
         return ERROR;
       else{
-        directorio dirAUX = sisAUX->d;
-        print_Directorio(dirAUX);
+        printf("3");
+        print_Directorio(sisAUX->d);
         return OK;
       }
     }
@@ -46,9 +48,7 @@ TipoRet CREATE (Sistema &s, char *nombreArchivo, int tamanio){
       return ERROR;
     }
     else{
-      directorio dirAUX = sisAUX->d;
-      archivo arAUX = dirAUX->a;
-      arAUX = insert_Archivo(arAUX, nombreArchivo, tamanio); //porq no usas arAux en vez de  dirAUX->a? - no me había dado cuenta, arreglado.
+      sisAUX->d = CreateArchivoDirectorio(sisAUX->d, nombreArchivo, tamanio);
       return OK;
     }
   }
@@ -65,16 +65,10 @@ TipoRet IF (Sistema &s, char *nombreArchivo, char *texto){
       return ERROR;
     }
     else{
-      directorio dirAUX = sisAUX->d;
-      archivo arAUX = dirAUX->a;
-      arAUX = buscaArchivo(arAUX, nombreArchivo);
-      if (arAUX != NULL){
-        insertaEnArchivo (arAUX, nombreArchivo, texto);
+      sisAUX->d = IFDirectorio(sisAUX->d, nombreArchivo, texto);
         return OK;
-      }
-      else
-        return ERROR;
     }
+    return ERROR;
   }
 }
 
@@ -90,18 +84,12 @@ TipoRet TYPE (Sistema &s, char *nombreArchivo){
       return ERROR;
     }
     else{
-      directorio dirAUX = sisAUX->d;
-      archivo arAUX = dirAUX->a;
-      arAUX = buscaArchivo(arAUX, nombreArchivo);
-      if (arAUX != NULL){
-      linea lnAUX = arAUX->cont;
-        imprimirLineas (lnAUX);
-        return OK;
-      }
-      else
-        return ERROR;
+      sisAUX->d = TYPEDirectorio(sisAUX->d, nombreArchivo);
+      return OK;
     }
+    return ERROR;
   }
+
 }
 
 //---------------------------------------------------------------------
@@ -115,11 +103,10 @@ TipoRet DELETE (Sistema &s, char *nombreArchivo){
       return ERROR;
     }
     else{
-      directorio dirAUX = sisAUX->d;
-      archivo arAUX = dirAUX->a;
-      arAUX = eliminar_Archivo(arAUX, nombreArchivo);
+      sisAUX->d = DELETEArchivoDirectorio(sisAUX->d, nombreArchivo);
       return OK;
     }
+    return ERROR;
   }
 }
 
@@ -134,9 +121,7 @@ TipoRet BF (Sistema &s, char *nombreArchivo, int k){
       return ERROR;
     }
     else{
-      directorio dirAUX = sisAUX->d;
-      archivo arAUX = dirAUX->a;
-      arAUX = eliminar_CantLineas(arAUX, nombreArchivo, k);
+      sisAUX->d = BFDirectorio(sisAUX->d, nombreArchivo, k);
       return OK;
     }
   }
@@ -153,9 +138,7 @@ TipoRet CAT (Sistema &s, char *nombreArchivo1, char *nombreArchivo2){
       return ERROR;
     }
     else{
-      directorio dirAUX = sisAUX->d;
-      archivo arAUX = dirAUX->a;
-      arAUX = Concat(arAUX, nombreArchivo1, nombreArchivo2);
+      sisAUX->d = CATDirectorio(sisAUX->d, nombreArchivo1, nombreArchivo2);
       return OK;
     }
   }

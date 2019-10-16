@@ -18,7 +18,7 @@ void print_Archivo(archivo a);
 archivo buscaArchivo (archivo a, char *nombreArchivo);
 //busca si existe el archivo con nombre nombreArchivo
 
-archivo insertaEnArchivo (archivo a, char *nombreArchivo, char *texto);
+archivo insertaEnArchivo (archivo a, char *texto);
 //inserta una linea en archivo nombreArchivo
 
 archivo eliminar_Archivo(archivo a, char *nombreArchivo);
@@ -29,4 +29,10 @@ archivo eliminar_CantLineas (archivo a, char *nombreArchivo, int k);
 
 archivo Concat(archivo a, char *nombreArchivo1, char *nombreArchivo2);
 //inserta las lineas de nombreArchivo2 al final de nombreArchivo1, o eso intenté
+
+archivo IFArchivo (archivo a,char *nombreArchivo, char *texto);
+
+archivo TYPEArchivo(archivo a, char *nombreArchivo);
+
+
 #endif

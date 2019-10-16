@@ -17,5 +17,15 @@ directorio create_Raiz(directorio d);
 
 void print_Directorio(directorio d);
 
+directorio CreateArchivoDirectorio(directorio d, char *nombreArchivo, int tamanio);
 
+directorio IFDirectorio(directorio d, char *nombreArchivo, char *texto);
+
+directorio TYPEDirectorio(directorio d,char *nombreArchivo);
+
+directorio DELETEArchivoDirectorio(directorio d, char *nombreArchivo);
+
+directorio BFDirectorio(directorio d, char *nombreArchivo, int k);
+
+directorio CATDirectorio(directorio d, char *nombreArchivo1, char *nombreArchivo2);
 #endif

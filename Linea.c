@@ -68,3 +68,11 @@ linea avanzaEnLineas (linea ln){
 char* devuelveContenidodeLinea (linea ln){
   return ln->l;
 }
+//---------------------------------------------------------------------
+linea IFLinea (linea ln, char *texto, int max){
+  while (cantLineas(ln)< max){
+    ln = insertaLinea (ln, texto);
+    ln = ln->sig;
+  }
+  return ln;
+}

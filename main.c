@@ -23,8 +23,9 @@ int main(){
 			fgets(parametro, MAX_PARAMETRO, stdin);
 			retorno = DIR (s);
 		}else if (strcmp(comando,"CREATE") == 0){
-			fgets(parametro, MAX_PARAMETRO, stdin);
-			retorno = CREATE (s, parametro);
+			cin >> parametro;
+			cin >> parametro_num;
+			retorno = CREATE (s, parametro, parametro_num);
 		}else if (strcmp(comando,"DELETE") == 0){
 			fgets(parametro, MAX_PARAMETRO, stdin);
 			retorno = DELETE (s, parametro);

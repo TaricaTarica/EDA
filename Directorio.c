@@ -13,7 +13,7 @@ struct nodoDirectorio{
 };
 
 directorio create_Raiz(directorio d){
-  if(d != NULL){
+  if(d == NULL){
     directorio aux = new(nodoDirectorio);
     aux->nombreDirectorio = new char[strlen("/") + 1];
     strcpy(aux->nombreDirectorio, "/");
@@ -45,18 +45,59 @@ directorio insert_Directorio(directorio d, char *nDirectorio){
 //---------------------------------------------------------------------
 
 void print_Directorio(directorio d){
-  directorio dirAUX = d;
-  archivo arAUX = dirAUX->a;
-  while(dirAUX->sig != NULL){
-    printf("+ %s", dirAUX->nombreDirectorio);
-    if(arAUX != NULL){
-      printf("\n");
-      printf("\t \t \t \t");
-      print_Archivo(arAUX);
-    }
+  do{
+    printf("+ %s", d->nombreDirectorio);
     printf("\n");
-    dirAUX = dirAUX->sig;
+    printf("\t \t \t \t");
+    print_Archivo(d->a);
+    d = d->sig;
+  }while (d->sig != NULL);
+  printf("\n");
+}
+
+
+//---------------------------------------------------------------------
+
+directorio CreateArchivoDirectorio(directorio d, char *nombreArchivo, int tamanio){
+  if(d != NULL){
+    d->a = insert_Archivo(d->a, nombreArchivo, tamanio);
+    return d;
   }
+  else
+    return d;
+}
+//---------------------------------------------------------------------
+
+directorio IFDirectorio(directorio d, char *nombreArchivo, char *texto){
+  d->a = IFArchivo(d->a, nombreArchivo, texto);
+  return d;
+
 }
 
 //---------------------------------------------------------------------
+
+directorio TYPEDirectorio(directorio d,char *nombreArchivo){
+  d->a = TYPEArchivo(d->a, nombreArchivo);
+  return d;
+}
+
+//---------------------------------------------------------------------
+
+directorio DELETEArchivoDirectorio(directorio d, char *nombreArchivo){
+  d->a = eliminar_Archivo(d->a, nombreArchivo);
+  return d;
+}
+
+//---------------------------------------------------------------------
+
+directorio BFDirectorio(directorio d, char *nombreArchivo, int k){
+
+  d->a = eliminar_CantLineas (d->a, nombreArchivo, k);
+  return d;
+}
+
+//---------------------------------------------------------------------
+directorio CATDirectorio(directorio d, char *nombreArchivo1, char *nombreArchivo2){
+  d->a = Concat(d->a, nombreArchivo1, nombreArchivo2);
+  return d;
+}

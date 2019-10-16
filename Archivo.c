@@ -32,12 +32,12 @@ archivo insert_Archivo(archivo a, char *nArchivo, int tamanio){
 //---------------------------------------------------------------------
 
 void print_Archivo(archivo a){
+  printf("1");
   if(a != NULL){
-    archivo aux = a;
-    while(aux->sig != NULL){
-      printf("- %s", aux->nombreArchivo);
+    while(a->sig != NULL){
+      printf("- %s", a->nombreArchivo);
       printf("\n");
-      aux = aux->sig;
+      a = a->sig;
     }
   }
 }
@@ -55,32 +55,36 @@ archivo buscaArchivo (archivo a, char *nombreArchivo){
 
 //---------------------------------------------------------------------
 
-archivo insertaEnArchivo (archivo a, char *nombreArchivo, char *texto){
-  archivo arAUX = buscaArchivo (a, nombreArchivo);//cambie los arAUX = a por busca archivo
-  linea lnAUX = arAUX->cont;
-  if (cantLineas(lnAUX) < arAUX->max)
-    insertaLinea (lnAUX, nombreArchivo, texto);
-  else
-    printf("Error: El texto es mayor al soportado por el archivo");
-  return a;
+archivo insertaEnArchivo (archivo a,char *texto){
+   a->cont = IFLinea(a->cont, texto, a->max);
+   return a;
 }
 
 //---------------------------------------------------------------------
 
 archivo eliminar_Archivo(archivo a, char *nombreArchivo){
-    if(a == NULL)
+    if(a == NULL){
       return a;
+    }
     else if(strcmp(a->nombreArchivo, nombreArchivo) == 0){
-      archivo arAUX = eliminar_Archivo(a->sig, nombreArchivo);
-      borrarLineas (arAUX->cont, arAUX->max);
-      delete a;
-      return arAUX;
+        archivo aux = a;
+        a = a->sig;
+        borrarLineas(aux->cont, aux->max);
+        delete aux;
+        return a;
+    }
+    else if(strcmp(a->sig->nombreArchivo, nombreArchivo) == 0){
+      archivo aux = a->sig;
+      a->sig = aux->sig;
+      borrarLineas (aux->cont, aux->max);
+      delete aux;
+      return a;
     }
     else{
       a->sig = eliminar_Archivo(a->sig, nombreArchivo);
       return a;
     }
-    return a;///
+    return a;
 }
 
 //---------------------------------------------------------------------
@@ -108,8 +112,30 @@ archivo Concat(archivo a, char *nombreArchivo1, char *nombreArchivo2){
     return a;
   }
   while (arAUX2->cont != NULL){
-    insertaEnArchivo (arAUX1, nombreArchivo1, devuelveContenidodeLinea(arAUX2->cont));//hace un control innecesario despues (busca archivo denuevo), pero creo q no pasa nada
+    insertaEnArchivo (arAUX1, devuelveContenidodeLinea(arAUX2->cont));//hace un control innecesario despues (busca archivo denuevo), pero creo q no pasa nada
     arAUX2->cont = avanzaEnLineas(arAUX->cont);//la idea es q avance el puntero en el contenido para mostrar el char q sigue en la lisa y asi ir metiendolos de a uno
   }//el devuelve contenido de linea es porq necesito poner un char para reutilizar la funcion de inserta en archivo
 return a;/// para que compile
 }
+
+//---------------------------------------------------------------------
+
+archivo IFArchivo (archivo a,char *nombreArchivo, char *texto){
+  archivo aux = buscaArchivo(a, nombreArchivo);
+  if (aux != NULL){
+    return insertaEnArchivo (aux, texto);
+  }
+  else
+    return a;
+}
+
+//---------------------------------------------------------------------
+
+archivo TYPEArchivo(archivo a, char *nombreArchivo){
+  archivo aux = buscaArchivo(a, nombreArchivo);
+  if (aux != NULL)
+    imprimirLineas (aux->cont);
+  return a;
+}
+
+//---------------------------------------------------------------------

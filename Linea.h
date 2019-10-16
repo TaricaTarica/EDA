@@ -27,4 +27,6 @@ linea avanzaEnLineas (linea ln);
 char* devuelveContenidodeLinea (linea ln);
 //devuelve el char de la linea
 
+linea IFLinea (linea ln, char *texto, int max);
+
 #endif
