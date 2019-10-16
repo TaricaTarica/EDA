@@ -45,16 +45,16 @@ directorio insert_Directorio(directorio d, char *nDirectorio){
 //---------------------------------------------------------------------
 
 void print_Directorio(directorio d){
+  directorio dirAUX = d;
   do{
-    printf("+ %s", d->nombreDirectorio);
+    printf("+ %s", dirAUX->nombreDirectorio);
     printf("\n");
     printf("\t \t \t \t");
-    print_Archivo(d->a);
-    d = d->sig;
+    print_Archivo(dirAUX->a);
+    dirAUX = dirAUX->sig;
   }while (d->sig != NULL);
   printf("\n");
 }
-
 
 //---------------------------------------------------------------------
 

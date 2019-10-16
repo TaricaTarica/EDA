@@ -32,13 +32,16 @@ archivo insert_Archivo(archivo a, char *nArchivo, int tamanio){
 //---------------------------------------------------------------------
 
 void print_Archivo(archivo a){
-  printf("1");
-  if(a != NULL){
-    while(a->sig != NULL){
-      printf("- %s", a->nombreArchivo);
+  archivo aux = a;
+  if(aux != NULL){
+    do{
+      printf("- %s", aux->nombreArchivo);
       printf("\n");
-      a = a->sig;
-    }
+      aux = aux->sig;
+    }while(aux->sig != NULL);
+  }
+  else{
+    printf("\n");
   }
 }
 
