@@ -51,7 +51,7 @@ void print_Archivo(archivo a){
 archivo buscaArchivo (archivo a, char *nombreArchivo){
   if (a==NULL)
     return NULL;
-  else if (a->nombreArchivo != nombreArchivo)
+  else if (strcmp(a->nombreArchivo, nombreArchivo) != 0)
     return buscaArchivo (a->sig, nombreArchivo);
   else
     return a;
@@ -125,7 +125,6 @@ return a;/// para que compile
 //---------------------------------------------------------------------
 
 archivo IFArchivo (archivo a,char *nombreArchivo, char *texto){
-  printf ("ifarchivo");
   archivo aux = buscaArchivo(a, nombreArchivo);
   if (aux != NULL){
     return insertaEnArchivo (aux, texto);
@@ -137,10 +136,8 @@ archivo IFArchivo (archivo a,char *nombreArchivo, char *texto){
 //---------------------------------------------------------------------
 
 archivo TYPEArchivo(archivo a, char *nombreArchivo){
-  printf ("busca");
   archivo aux = buscaArchivo(a, nombreArchivo);
   if (aux != NULL){
-    printf ("lineas");
     imprimirLineas (aux->cont);
   }
   return a;

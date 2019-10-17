@@ -69,7 +69,6 @@ directorio CreateArchivoDirectorio(directorio d, char *nombreArchivo, int tamani
 //---------------------------------------------------------------------
 
 directorio IFDirectorio(directorio d, char *nombreArchivo, char *texto){
-  printf ("ifdir");
   d->a = IFArchivo(d->a, nombreArchivo, texto);
   return d;
 

@@ -49,11 +49,13 @@ int cantLineas (linea ln){
 //---------------------------------------------------------------------
 
 void imprimirLineas (linea ln){
-  if(ln != NULL){
-    linea aux = ln;
-    while(aux->sig != NULL){
+  linea aux = ln;
+  if(aux != NULL){
+    printf(" %s ", aux->l);
+    if(aux->sig != NULL){
       printf(" %s ", aux->l);
       aux = aux->sig;
+      imprimirLineas(aux);
     }
   }
 }
@@ -79,9 +81,9 @@ char* devuelveContenidodeLinea (linea ln){
 }
 //---------------------------------------------------------------------
 linea IFLinea (linea ln, char *texto, int max){
-  while (cantLineas(ln)< max){
+  if(cantLineas(ln) < max){
     ln = insertaLinea (ln, texto);
-    ln = ln->sig;
+    //ln = ln->sig;
   }
   return ln;
 }
