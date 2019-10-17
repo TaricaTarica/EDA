@@ -53,8 +53,8 @@ void imprimirLineas (linea ln){
   if(aux != NULL){
     printf(" %s ", aux->l);
     if(aux->sig != NULL){
-      printf(" %s ", aux->l);
       aux = aux->sig;
+      printf(" %s ", aux->l);
       imprimirLineas(aux);
     }
   }
