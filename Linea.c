@@ -13,6 +13,15 @@ struct nodo_linea{
     linea sig;
 };
 
+linea sangria(){
+
+  char * c = new(char[MAX_COMANDO]);
+  strcpy (c,"-");
+  linea aux = new(nodo_linea);
+  aux->l = c;
+  aux->sig = NULL;
+  return aux;
+}
 
 linea insertaLinea (linea ln, char *texto){
   if (ln == NULL){

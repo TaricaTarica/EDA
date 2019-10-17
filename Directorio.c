@@ -49,7 +49,7 @@ void print_Directorio(directorio d){
   do{
     printf("+ %s", dirAUX->nombreDirectorio);
     printf("\n");
-    printf("\t \t \t \t");
+    printf("\t \t");
     print_Archivo(dirAUX->a);
     dirAUX = dirAUX->sig;
   }while (d->sig != NULL);
@@ -69,6 +69,7 @@ directorio CreateArchivoDirectorio(directorio d, char *nombreArchivo, int tamani
 //---------------------------------------------------------------------
 
 directorio IFDirectorio(directorio d, char *nombreArchivo, char *texto){
+  printf ("ifdir");
   d->a = IFArchivo(d->a, nombreArchivo, texto);
   return d;
 

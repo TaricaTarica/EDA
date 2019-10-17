@@ -28,5 +28,9 @@ char* devuelveContenidodeLinea (linea ln);
 //devuelve el char de la linea
 
 linea IFLinea (linea ln, char *texto, int max);
+//parte de IF en linea.c
+
+linea sangria();
+//para poder hacer el type, asi le meto una linea de vivo para q tenga
 
 #endif

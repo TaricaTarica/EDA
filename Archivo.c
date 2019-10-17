@@ -17,10 +17,9 @@ archivo insert_Archivo(archivo a, char *nArchivo, int tamanio){
       archivo aux = new(nodoArchivo);
       aux->nombreArchivo = new char[strlen(nArchivo) + 1];
       strcpy(aux->nombreArchivo, nArchivo);
-      aux->cont = NULL;
+      aux->cont = sangria();
       aux->max = tamanio;
       aux->sig = NULL;
-
       return aux;
     }
     else{
@@ -34,11 +33,13 @@ archivo insert_Archivo(archivo a, char *nArchivo, int tamanio){
 void print_Archivo(archivo a){
   archivo aux = a;
   if(aux != NULL){
-    do{
       printf("- %s", aux->nombreArchivo);
       printf("\n");
-      aux = aux->sig;
-    }while(aux->sig != NULL);
+      if (aux->sig != NULL){
+        aux = aux->sig;
+        printf("\t \t");
+        print_Archivo(aux);
+      }
   }
   else{
     printf("\n");
@@ -124,6 +125,7 @@ return a;/// para que compile
 //---------------------------------------------------------------------
 
 archivo IFArchivo (archivo a,char *nombreArchivo, char *texto){
+  printf ("ifarchivo");
   archivo aux = buscaArchivo(a, nombreArchivo);
   if (aux != NULL){
     return insertaEnArchivo (aux, texto);
@@ -135,9 +137,12 @@ archivo IFArchivo (archivo a,char *nombreArchivo, char *texto){
 //---------------------------------------------------------------------
 
 archivo TYPEArchivo(archivo a, char *nombreArchivo){
+  printf ("busca");
   archivo aux = buscaArchivo(a, nombreArchivo);
-  if (aux != NULL)
+  if (aux != NULL){
+    printf ("lineas");
     imprimirLineas (aux->cont);
+  }
   return a;
 }
 

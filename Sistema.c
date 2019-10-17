@@ -30,7 +30,6 @@ TipoRet DIR (Sistema &s){
       if(sisAUX->d == NULL)
         return ERROR;
       else{
-        printf("3");
         print_Directorio(sisAUX->d);
         return OK;
       }
@@ -54,7 +53,7 @@ TipoRet CREATE (Sistema &s, char *nombreArchivo, int tamanio){
   }
 }
 
-//---------------------------------------------------------------------
+//---------------------------------------------------------------------HASTA ACÀ TODO OK
 
 TipoRet IF (Sistema &s, char *nombreArchivo, char *texto){
   if(s == NULL)
@@ -74,7 +73,7 @@ TipoRet IF (Sistema &s, char *nombreArchivo, char *texto){
 
 //---------------------------------------------------------------------
 
-TipoRet TYPE (Sistema &s, char *nombreArchivo){
+TipoRet TYPE (Sistema &s, char *nombreArchivo){ //me calente y me fui a comer
 
   if(s == NULL)
     return ERROR;

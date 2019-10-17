@@ -23,7 +23,9 @@ int main(){
 			fgets(parametro, MAX_PARAMETRO, stdin);
 			retorno = DIR (s);
 		}else if (strcmp(comando,"CREATE") == 0){
+			cout << "nombre del archivo: ";
 			cin >> parametro;
+			cout << "tamanio: ";
 			cin >> parametro_num;
 			retorno = CREATE (s, parametro, parametro_num);
 		}else if (strcmp(comando,"DELETE") == 0){
@@ -36,8 +38,10 @@ int main(){
 			fgets(parametro1, MAX_PARAMETRO, stdin);
 			retorno = IC (s, parametro, parametro1);
 		}*/else if (strcmp(comando,"IF") == 0){
+			cout << "nombre del archivo: ";
 			cin >> parametro;
-			fgets(parametro1, MAX_PARAMETRO, stdin);
+			cout << "linea a insertar: ";
+			cin >> parametro1;
 			retorno = IF (s, parametro, parametro1);
 		}/*else if (strcmp(comando,"BC") == 0){
 			cin >> parametro;
@@ -52,6 +56,7 @@ int main(){
 			cin >> parametro1;
 			retorno = CAT (s, parametro, parametro1);
 		}else if (strcmp(comando,"TYPE") == 0){
+			cout << "nombre del archivo: ";
 			cin >> parametro;
 			retorno = TYPE (s, parametro);
 		}else if (strcmp(comando,"salir") == 0){
