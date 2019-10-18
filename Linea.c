@@ -53,9 +53,7 @@ void imprimirLineas (linea ln){
   if(aux != NULL){
     printf(" %s ", aux->l);
     if(aux->sig != NULL){
-      aux = aux->sig;
-      printf(" %s ", aux->l);
-      imprimirLineas(aux);
+      imprimirLineas(aux->sig);
     }
   }
 }
@@ -63,11 +61,16 @@ void imprimirLineas (linea ln){
 //---------------------------------------------------------------------
 
 void borrarLineas (linea ln, int cant){
-  if(ln != NULL)
+  printf("lineas");
+  if(ln != NULL){
+    printf("xd");
     borrarLineas (ln->sig, cant);
-  ln->l = NULL;
-  ln->sig = NULL;
-  delete ln;
+    ln->l = NULL;
+    ln->sig = NULL;
+    delete ln;
+  }
+  else
+    return;
 }
 
 //---------------------------------------------------------------------
@@ -83,7 +86,6 @@ char* devuelveContenidodeLinea (linea ln){
 linea IFLinea (linea ln, char *texto, int max){
   if(cantLineas(ln) < max){
     ln = insertaLinea (ln, texto);
-    //ln = ln->sig;
   }
   return ln;
 }

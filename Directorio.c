@@ -91,7 +91,7 @@ directorio DELETEArchivoDirectorio(directorio d, char *nombreArchivo){
 //---------------------------------------------------------------------
 
 directorio BFDirectorio(directorio d, char *nombreArchivo, int k){
-
+  printf("2");
   d->a = eliminar_CantLineas (d->a, nombreArchivo, k);
   return d;
 }

@@ -49,12 +49,15 @@ void print_Archivo(archivo a){
 //---------------------------------------------------------------------
 
 archivo buscaArchivo (archivo a, char *nombreArchivo){
-  if (a==NULL)
+  if (a==NULL){
+    printf("no se encontro el archivo");
     return NULL;
+  }
   else if (strcmp(a->nombreArchivo, nombreArchivo) != 0)
     return buscaArchivo (a->sig, nombreArchivo);
-  else
+  else{
     return a;
+  }
 }
 
 //---------------------------------------------------------------------
@@ -67,37 +70,46 @@ archivo insertaEnArchivo (archivo a,char *texto){
 //---------------------------------------------------------------------
 
 archivo eliminar_Archivo(archivo a, char *nombreArchivo){
-    if(a == NULL){
-      return a;
-    }
-    else if(strcmp(a->nombreArchivo, nombreArchivo) == 0){
-        archivo aux = a;
-        a = a->sig;
-        borrarLineas(aux->cont, aux->max);
-        delete aux;
-        return a;
-    }
-    else if(strcmp(a->sig->nombreArchivo, nombreArchivo) == 0){
-      archivo aux = a->sig;
-      a->sig = aux->sig;
-      borrarLineas (aux->cont, aux->max);
+  printf("1");
+  if(a == NULL){
+    return a;
+  }
+  else if(strcmp(a->nombreArchivo, nombreArchivo) == 0){
+      printf("2");
+      archivo aux = a;
+      a = a->sig;
+      borrarLineas(aux->cont, aux->max);
       delete aux;
       return a;
-    }
-    else{
-      a->sig = eliminar_Archivo(a->sig, nombreArchivo);
-      return a;
-    }
+  }
+  else if(strcmp(a->sig->nombreArchivo, nombreArchivo) == 0){
+    printf("3");
+    archivo aux = a->sig;
+    a->sig = aux->sig;
+    borrarLineas (aux->cont, aux->max);
+    delete aux;
     return a;
+  }
+  else{
+    a->sig = eliminar_Archivo(a->sig, nombreArchivo);
+    return a;
+  }
+  return a;
 }
 
 //---------------------------------------------------------------------
 
 archivo eliminar_CantLineas (archivo a, char *nombreArchivo, int k){
-
+  printf("3");
   archivo arAUX = buscaArchivo (a, nombreArchivo);//cambie los arAUX = a por busca archivo
+  if (arAUX != NULL){
+    while (k > 0){
+      arAUX = arAUX->sig;
+      k--;
+    }
   borrarLineas (arAUX->cont, k);
   printf("lineas borradas");
+  }
   return a;
 }
 

@@ -29,7 +29,8 @@ int main(){
 			cin >> parametro_num;
 			retorno = CREATE (s, parametro, parametro_num);
 		}else if (strcmp(comando,"DELETE") == 0){
-			fgets(parametro, MAX_PARAMETRO, stdin);
+			cout << "nombre del archivo: ";
+			cin >> parametro;
 			retorno = DELETE (s, parametro);
 		}/*else if (strcmp(comando,"UNDELETE") == 0){
 			retorno = UNDELETE (s);
@@ -48,7 +49,9 @@ int main(){
 			cin >> parametro_num;
 			retorno = BC (s, parametro, parametro_num);
 		}*/else if (strcmp(comando,"BF") == 0){
+			cout << "nombre del archivo: ";
 			cin >> parametro;
+			cout << "lineas a borrar: ";
 			cin >> parametro_num;
 			retorno = BF (s, parametro, parametro_num);
 		}else if (strcmp(comando,"CAT") == 0){

@@ -112,6 +112,7 @@ TipoRet DELETE (Sistema &s, char *nombreArchivo){
 //---------------------------------------------------------------------
 
 TipoRet BF (Sistema &s, char *nombreArchivo, int k){
+  printf("0");//tira segmentation fault antes de siquiera imprimir el 0, no se porq
   if(s == NULL)
     return ERROR;
   else{
@@ -120,6 +121,7 @@ TipoRet BF (Sistema &s, char *nombreArchivo, int k){
       return ERROR;
     }
     else{
+      printf("1");
       sisAUX->d = BFDirectorio(sisAUX->d, nombreArchivo, k);
       return OK;
     }
