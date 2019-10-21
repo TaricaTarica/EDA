@@ -36,8 +36,10 @@ TipoRet CAT (Sistema &s, char *nombreArchivo1, char *nombreArchivo2);
 //Concatena el archivo de nombre NombreArchivo2 a continuación del archivo de nombre
 //NombreArchivo1, dejando el contenido del archivo resultante en el archivo NombreArchivo1
 
-//TipoRet UNDELETE (Sistema &s);
-//Este comando recupera el último archivo eliminado en el sistema mediante el comando DELETE (si hay al menos uno, sino no tiene efecto), restaurándolo al directorio en donde fue eliminado, siempre y cuando este directorio, determinado por su ruta, exista.
+TipoRet UNDELETE (Sistema &s);
+//Este comando recupera el último archivo eliminado en el sistema mediante el comando DELETE
+//(si hay al menos uno, sino no tiene efecto)
+//restaurándolo al directorio en donde fue eliminado, siempre y cuando este directorio, determinado por su ruta, exista.
 
 
 #endif

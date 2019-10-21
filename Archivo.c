@@ -13,6 +13,11 @@ struct nodoArchivo{
 };
 
 archivo insert_Archivo(archivo a, char *nArchivo, int tamanio){
+  if ( a != NULL && existeArchivo (a, nArchivo) == true){
+    printf("el archivo ya existe");
+    return a;
+  }
+  else{
     if(a == NULL){
       archivo aux = new(nodoArchivo);
       aux->nombreArchivo = new char[strlen(nArchivo) + 1];
@@ -26,6 +31,7 @@ archivo insert_Archivo(archivo a, char *nArchivo, int tamanio){
       a->sig = insert_Archivo(a->sig, nArchivo, tamanio);
       return a;
     }
+  }
 }
 
 //---------------------------------------------------------------------
@@ -50,7 +56,7 @@ void print_Archivo(archivo a){
 
 archivo buscaArchivo (archivo a, char *nombreArchivo){
   if (a==NULL){
-    printf("no se encontro el archivo");
+    printf("no se encontró un archivo con ese nombre");
     return NULL;
   }
   else if (strcmp(a->nombreArchivo, nombreArchivo) != 0)
@@ -156,3 +162,15 @@ archivo TYPEArchivo(archivo a, char *nombreArchivo){
 }
 
 //---------------------------------------------------------------------
+
+bool existeArchivo (archivo a, char *nombreArchivo){
+  if (strcmp(a->nombreArchivo, nombreArchivo) == 0)
+    return true;
+  else if (strcmp(a->nombreArchivo, nombreArchivo) != 0){
+    if (a->sig == NULL)
+      return false;
+    else
+      existeArchivo (a->sig, nombreArchivo);
+  }
+  return false;
+}

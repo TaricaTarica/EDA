@@ -34,5 +34,7 @@ archivo IFArchivo (archivo a,char *nombreArchivo, char *texto);
 
 archivo TYPEArchivo(archivo a, char *nombreArchivo);
 
+bool existeArchivo(archivo a, char *nombreArchivo);
+
 
 #endif
