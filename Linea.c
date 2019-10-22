@@ -75,6 +75,19 @@ void borrarLineas (linea ln, int cant){
 
 //---------------------------------------------------------------------
 
+void BFlineas (linea ln, int k){
+  if (ln->sig != NULL){
+    BFlineas (ln->sig, k);
+    if (ln != NULL && k<=0 && ln->sig == NULL)
+      ln->l = NULL;
+      ln->sig = NULL;
+      delete ln;
+
+  }
+}
+
+//---------------------------------------------------------------------
+
 linea avanzaEnLineas (linea ln){
   return ln->sig;
 }

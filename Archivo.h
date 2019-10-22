@@ -24,7 +24,7 @@ archivo insertaEnArchivo (archivo a, char *texto);
 archivo eliminar_Archivo(archivo a, char *nombreArchivo);
 //elimina las lineas del archivo nombreArchivo y luego el archivo mismo
 
-archivo eliminar_CantLineas (archivo a, char *nombreArchivo, int k);
+archivo  BFarchivo (archivo a, char *nombreArchivo, int k);
 //elimina cierta cantidad de lineas del archivo nombreArchivo
 
 archivo Concat(archivo a, char *nombreArchivo1, char *nombreArchivo2);

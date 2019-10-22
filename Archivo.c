@@ -105,17 +105,10 @@ archivo eliminar_Archivo(archivo a, char *nombreArchivo){
 
 //---------------------------------------------------------------------
 
-archivo eliminar_CantLineas (archivo a, char *nombreArchivo, int k){
+archivo BFarchivo (archivo a, char *nombreArchivo, int k){
   printf("3");
-  archivo arAUX = buscaArchivo (a, nombreArchivo);//cambie los arAUX = a por busca archivo
-  if (arAUX != NULL){
-    while (k > 0){
-      arAUX = arAUX->sig;
-      k--;
-    }
-  borrarLineas (arAUX->cont, k);
-  printf("lineas borradas");
-  }
+  a = buscaArchivo(a, nombreArchivo);
+  BFlineas (a->cont,k);
   return a;
 }
 
