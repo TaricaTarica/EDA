@@ -97,7 +97,7 @@ directorio BFDirectorio(directorio d, char *nombreArchivo, int k){
 }
 
 //---------------------------------------------------------------------
-directorio CATDirectorio(directorio d, char *nombreArchivo1, char *nombreArchivo2){
+/*directorio CATDirectorio(directorio d, char *nombreArchivo1, char *nombreArchivo2){
   d->a = Concat(d->a, nombreArchivo1, nombreArchivo2);
   return d;
-}
+}*/

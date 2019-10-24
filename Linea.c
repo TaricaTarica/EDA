@@ -63,7 +63,6 @@ void imprimirLineas (linea ln){
 void borrarLineas (linea ln, int cant){
   printf("lineas");
   if(ln != NULL){
-    printf("xd");
     borrarLineas (ln->sig, cant);
     ln->l = NULL;
     ln->sig = NULL;
@@ -75,22 +74,20 @@ void borrarLineas (linea ln, int cant){
 
 //---------------------------------------------------------------------
 
-void BFlineas (linea ln, int k){
-  if (ln->sig != NULL){
-    BFlineas (ln->sig, k);
-    if (ln != NULL && k<=0 && ln->sig == NULL)
-      ln->l = NULL;
-      ln->sig = NULL;
-      delete ln;
-
+linea BFlineas (linea ln){
+  linea aux = ln;
+  linea aux2 = aux;
+  while (aux->sig != NULL){
+    aux2 = aux;
+    aux = aux->sig;
   }
+  aux->l = NULL;
+  aux->sig = NULL;
+  delete aux;
+  aux2->sig = NULL;
+  return ln;
 }
 
-//---------------------------------------------------------------------
-
-linea avanzaEnLineas (linea ln){
-  return ln->sig;
-}
 //---------------------------------------------------------------------
 char* devuelveContenidodeLinea (linea ln){
   return ln->l;

@@ -54,11 +54,11 @@ int main(){
 			cout << "lineas a borrar: ";
 			cin >> parametro_num;
 			retorno = BF (s, parametro, parametro_num);
-		}else if (strcmp(comando,"CAT") == 0){
+		}/*else if (strcmp(comando,"CAT") == 0){
 			cin >> parametro;
 			cin >> parametro1;
 			retorno = CAT (s, parametro, parametro1);
-		}else if (strcmp(comando,"TYPE") == 0){
+		}*/else if (strcmp(comando,"TYPE") == 0){
 			cout << "nombre del archivo: ";
 			cin >> parametro;
 			retorno = TYPE (s, parametro);

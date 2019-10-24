@@ -106,15 +106,19 @@ archivo eliminar_Archivo(archivo a, char *nombreArchivo){
 //---------------------------------------------------------------------
 
 archivo BFarchivo (archivo a, char *nombreArchivo, int k){
-  printf("3");
   a = buscaArchivo(a, nombreArchivo);
-  BFlineas (a->cont,k);
+  if (a!=NULL){
+    while (a->cont != NULL && k>0){
+      a->cont = BFlineas (a->cont);
+      k--;
+    }
+  }
   return a;
 }
 
 //---------------------------------------------------------------------
 
-archivo Concat(archivo a, char *nombreArchivo1, char *nombreArchivo2){
+/*archivo Concat(archivo a, char *nombreArchivo1, char *nombreArchivo2){
   archivo arAUX = a;
   archivo arAUX1 = buscaArchivo (arAUX, nombreArchivo1);//busca y asigna el asrchivo a cada variable
   archivo arAUX2 = buscaArchivo (arAUX, nombreArchivo2);
@@ -132,7 +136,7 @@ archivo Concat(archivo a, char *nombreArchivo1, char *nombreArchivo2){
   }//el devuelve contenido de linea es porq necesito poner un char para reutilizar la funcion de inserta en archivo
 return a;/// para que compile
 }
-
+*/
 //---------------------------------------------------------------------
 
 archivo IFArchivo (archivo a,char *nombreArchivo, char *texto){

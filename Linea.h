@@ -33,4 +33,8 @@ linea IFLinea (linea ln, char *texto, int max);
 linea sangria();
 //para poder hacer el type, asi le meto una linea de vivo para q tenga
 
+linea BFlineas (linea ln);
+//el borrado recursivo de adelante hacia atras
+
+
 #endif
