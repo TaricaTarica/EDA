@@ -9,13 +9,14 @@
 
 struct nodoSistema{
     directorio d;
-    //direcotrioActual da;
+    direcotrioActual dir_act;
 };
 
 Sistema create_Sistema(){
   Sistema s = new(nodoSistema);
   s->d = NULL;
   s->d = create_Raiz(s->d);
+  s->dir_act = s->d;
   return s;
 }
 
