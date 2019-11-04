@@ -9,7 +9,9 @@
 
 struct nodoSistema{
     directorio d;
-    direcotrioActual dir_act;
+    directorio dir_act;
+    Sistema de;
+    Sistema iz;
 };
 
 Sistema create_Sistema(){
@@ -54,7 +56,7 @@ TipoRet CREATE (Sistema &s, char *nombreArchivo, int tamanio){
   }
 }
 
-//---------------------------------------------------------------------HASTA ACÀ TODO OK
+//---------------------------------------------------------------------
 
 TipoRet IF (Sistema &s, char *nombreArchivo, char *texto){
   if(s == NULL)

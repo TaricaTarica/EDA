@@ -10,8 +10,8 @@ struct nodoDirectorio{
     char *nombreDirectorio;
     archivo a;
     directorio sig;
-    directorio hijo;
-    directorio padre;
+    /*directorio hijo;
+    directorio padre;*/
 };
 
 directorio create_Raiz(directorio d){
@@ -22,7 +22,7 @@ directorio create_Raiz(directorio d){
     aux->a = NULL;
     aux->sig = NULL;
     aux->hijo = NULL;
-    aux->padre = NULL; 
+    aux->padre = NULL;
     return aux;
   }
   else
