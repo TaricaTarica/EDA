@@ -10,8 +10,6 @@
 struct nodoSistema{
     directorio d;
     directorio dir_act;
-    Sistema de;
-    Sistema iz;
 };
 
 Sistema create_Sistema(){
@@ -20,6 +18,18 @@ Sistema create_Sistema(){
   s->d = create_Raiz(s->d);
   s->dir_act = s->d;
   return s;
+}
+
+//---------------------------------------------------------------------
+
+TipoRet MKDIR (Sistema &s, char *cadena){
+    if(s == NULL){
+      return ERROR;
+    }
+    else{
+      create_directorio(sisAUX->d, cadena);
+      return OK;
+    }
 }
 
 //---------------------------------------------------------------------

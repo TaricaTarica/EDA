@@ -28,6 +28,10 @@ int main(){
 			cout << "tamanio: ";
 			cin >> parametro_num;
 			retorno = CREATE (s, parametro, parametro_num);
+		}else if (strcmp(comando,"MKDIR") == 0){
+			cout << "ruta: ";
+			cin >> parametro;
+			retorno = MKDIR (s, parametro);
 		}else if (strcmp(comando,"DELETE") == 0){
 			cout << "nombre del archivo: ";
 			cin >> parametro;
@@ -70,11 +74,20 @@ int main(){
 
 		if (retorno == OK)
 			cout << " - OK\n\n";
-		else if (retorno == ERROR)
+
+	pch = strtok (comando,"( ,)\n");
+
+		if (strcasecmp (pch, "createTable") == 0){
+			pch = strtok (NULL, "( ,)\n");
+			if (pch != NULL){
+				ret = createTable (bd, pch);
+				ejecutado = true;	else if (retorno == ERROR)
 			cout << " - ERROR\n\n";
 		else
 			cout << " - NO IMPLEMENTADA\n\n";
 	}while (!salir);
+
+
 
 	/*s = DESTRUIR_SISTEMA ();
 	delete [] comando;

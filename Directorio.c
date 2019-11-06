@@ -10,15 +10,15 @@ struct nodoDirectorio{
     char *nombreDirectorio;
     archivo a;
     directorio sig;
-    /*directorio hijo;
-    directorio padre;*/
+    directorio hijo;
+    directorio padre;
 };
 
 directorio create_Raiz(directorio d){
   if(d == NULL){
     directorio aux = new(nodoDirectorio);
-    aux->nombreDirectorio = new char[strlen("/") + 1];
-    strcpy(aux->nombreDirectorio, "/");
+    aux->nombreDirectorio = new char[strlen("raiz") + 1];
+    strcpy(aux->nombreDirectorio, "raiz");
     aux->a = NULL;
     aux->sig = NULL;
     aux->hijo = NULL;
@@ -31,18 +31,50 @@ directorio create_Raiz(directorio d){
 
 //---------------------------------------------------------------------
 
-directorio insert_Directorio(directorio d, char *nDirectorio){
-    if(d == NULL){
-    directorio aux = new(nodoDirectorio);
-    aux->nombreDirectorio = new char[strlen(nDirectorio) + 1];
-    strcpy(aux->nombreDirectorio, nDirectorio);
-    aux->a = NULL;
-    aux->sig = NULL;
-    return aux;
+directorio create_Directorio(directorio d, char *cadena){
+  char *path = strtok (cadena,"/");
+  if (parametro == NULL)
+    while (parametro != NULL){
+      char *nombreDirectorio;
+      strcpy(nombreDirectorio,parametro);
+      parametro = strtok(NULL,"/");
+      if (parametro != NULL)
+        d = busca_directorio (d, parametro);
     }
+    directorio aux = new (nodoDirectorio);
+    if (d->hijo == NULL){
+      aux->nombreDirectorio = nombreDirectorio;
+      aux->a = NULL;
+      aux->sig = NULL;
+      aux->hijo = NULL;
+      aux->padre = d;
+      return d;
+    }
+    else
+      aux = d->hijo;
+      while (d->hijo != NULL)
+        aux = aux->sig;
+      directorio aux1 = aux
+      aux->nombreDirectorio = nombreDirectorio;
+      aux->a = NULL;
+      aux->sig = NULL;
+      aux->hijo = NULL;
+      aux->padre = d;
+      aux1->sig = aux;
+      return d;
+}
+
+//---------------------------------------------------------------------
+
+directorio busca_directorio(directorio d, char *parametro){
+
+  else if (strcmp(d->nombreDirectorio, parametro) == 0)
+    return d->hijo;
+  else if(d->sig != NULL)
+    return busca_directorio(d->sig, parametro);
     else{
-        d->sig = insert_Directorio(d->sig, nDirectorio);
-        return d;
+      printf("no se encontró un directorio con ese nombre");
+      return NULL;
     }
 }
 

@@ -16,6 +16,8 @@ Sistema create_Sistema();
 TipoRet DIR (Sistema &s);
 //Este comando muestra el contenido del directorio actual, ya sean subdirectorios o archivos.
 
+TipoRet MKDIR (Sistema &s, char *cadena);
+
 TipoRet CREATE (Sistema &s, char *nombreArchivo, int tamanio);
 //Este comando crea un nuevo archivo vacío en el directorio especificado por su ruta (ya sea relativa o absoluta)
 
