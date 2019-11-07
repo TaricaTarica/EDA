@@ -41,10 +41,27 @@ TipoRet MKDIR (Sistema &s, char *cadena){
 //---------------------------------------------------------------------
 
 TipoRet CD (Sistema &s, Cadena nombreDirectorio){
-	
+	return NO_IMPLEMENTADA;
 }
 
+//---------------------------------------------------------------------
 
+TipoRet  PWD (Sistema &s, Cadena nombreDirectorio){
+	return NO_IMPLEMENTADA	
+}
+
+//---------------------------------------------------------------------
+
+TipoRet RMDIR (Sistema &s, Cadena nombreDirectorio){
+	return NO_IMPLEMENTADA;
+}
+
+//---------------------------------------------------------------------
+
+TipoRet COPY(Sistema &s, Cadena directorio/archivoOrigen, Cadena directorioDestino){
+	return NO_IMPLEMENTADA
+
+}
 
 //---------------------------------------------------------------------
 

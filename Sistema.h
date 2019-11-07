@@ -17,6 +17,7 @@ TipoRet DIR (Sistema &s);
 //Este comando muestra el contenido del directorio actual, ya sean subdirectorios o archivos.
 
 TipoRet MKDIR (Sistema &s, char *cadena);
+//Este comando creaun nuevo directorio en la rutaespecificada. Esta ruta puede ser tanto relativacomo absoluta.
 
 TipoRet CREATE (Sistema &s, char *nombreArchivo, int tamanio);
 //Este comando crea un nuevo archivo vacío en el directorio especificado por su ruta (ya sea relativa o absoluta)
@@ -43,7 +44,18 @@ TipoRet UNDELETE (Sistema &s);
 //(si hay al menos uno, sino no tiene efecto)
 //restaurándolo al directorio en donde fue eliminado, siempre y cuando este directorio, determinado por su ruta, exista.
 
-
 TipoRet CD (Sistema &s, Cadena nombreDirectorio);
+//Este comando es el únicoque permite desplazarnos en la estructura de directorios, definiendo así al nuevo directorio actual.
+
+TipoRet  PWD (Sistema &s, Cadena nombreDirectorio);
+//Este   comando   muestra   el   camino   desde   la RAIZal directorioactual siguiendo   el   formato: “/.../.../dirActual”.
+
+TipoRet RMDIR (Sistema &s, Cadena nombreDirectorio);
+//Este comando eliminaundirectorioespecificado por una ruta(relativa o absoluta) además de todos los subdirectoriosy archivosque éste contenga
+
+TipoRet COPY(Sistema &s, Cadena directorio/archivoOrigen, Cadena directorioDestino);
+//Este  comando copia  un  directorio  o  archivo desde  un directorioorigen  hacia  un directoriodestino. 
+//Tanto el directorio origen como el directorio destino pueden estar especificados por sus rutasya sean relativas o absolutas.  
+//Como  es  de  suponerse,  al  copiar  un directorio,su  estructura  de subdirectorios debería quedar inalterada. 
 
 #endif
