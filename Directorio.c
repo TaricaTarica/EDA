@@ -135,7 +135,24 @@ directorio BFDirectorio(directorio d, char *nombreArchivo, int k){
 }
 
 //---------------------------------------------------------------------
+
+directorio CDdir (directorio d, char*nombreDir){
+}
+
+//---------------------------------------------------------------------
 /*directorio CATDirectorio(directorio d, char *nombreArchivo1, char *nombreArchivo2){
   d->a = Concat(d->a, nombreArchivo1, nombreArchivo2);
   return d;
 }*/
+
+//---------------------------------------------------------------------
+bool DIRpertenece (directorio d, char * nombreDir){
+	if (d == NULL)
+		return false;
+	else{
+		if (strcmp(d->nombreDirectorio, nombreDir) == 0)
+			return true;
+		else return DIRpertenece(d->hijo, nombreDir) || DIRpertenece(d->sig, nombreDir);
+	}
+}
+

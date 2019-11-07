@@ -44,4 +44,6 @@ TipoRet UNDELETE (Sistema &s);
 //restaurándolo al directorio en donde fue eliminado, siempre y cuando este directorio, determinado por su ruta, exista.
 
 
+TipoRet CD (Sistema &s, Cadena nombreDirectorio);
+
 #endif

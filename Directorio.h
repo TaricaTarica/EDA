@@ -32,4 +32,8 @@ directorio DELETEArchivoDirectorio(directorio d, char *nombreArchivo);
 directorio BFDirectorio(directorio d, char *nombreArchivo, int k);
 
 directorio CATDirectorio(directorio d, char *nombreArchivo1, char *nombreArchivo2);
+
+bool DIRpertenece (directorio d, char * nombreDir);
+
+directorio CDdir (directorio d, char*nombreDir);
 #endif

@@ -40,6 +40,14 @@ TipoRet MKDIR (Sistema &s, char *cadena){
 
 //---------------------------------------------------------------------
 
+TipoRet CD (Sistema &s, Cadena nombreDirectorio){
+	
+}
+
+
+
+//---------------------------------------------------------------------
+
 TipoRet DIR (Sistema &s){
     if(s == NULL){
       return ERROR;
