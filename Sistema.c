@@ -23,13 +23,19 @@ Sistema create_Sistema(){
 //---------------------------------------------------------------------
 
 TipoRet MKDIR (Sistema &s, char *cadena){
-    if(s == NULL){
+  if(s == NULL){
+    return ERROR;
+  }
+  else{
+    Sistema sisAUX = s;
+    if(sisAUX->d == NULL)
       return ERROR;
+  else{
+    Sistema sisAUX = s;
+    sisAUX->d = create_directorio(sisAUX->d, cadena);
+    return OK;
     }
-    else{
-      create_directorio(sisAUX->d, cadena);
-      return OK;
-    }
+  }
 }
 
 //---------------------------------------------------------------------

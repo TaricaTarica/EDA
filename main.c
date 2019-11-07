@@ -75,16 +75,6 @@ int main(){
 		if (retorno == OK)
 			cout << " - OK\n\n";
 
-	pch = strtok (comando,"( ,)\n");
-
-		if (strcasecmp (pch, "createTable") == 0){
-			pch = strtok (NULL, "( ,)\n");
-			if (pch != NULL){
-				ret = createTable (bd, pch);
-				ejecutado = true;	else if (retorno == ERROR)
-			cout << " - ERROR\n\n";
-		else
-			cout << " - NO IMPLEMENTADA\n\n";
 	}while (!salir);
 
 

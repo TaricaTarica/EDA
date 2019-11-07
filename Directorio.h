@@ -15,6 +15,10 @@ directorio insert_Directorio(directorio d, char *nDirectorio);
 
 directorio create_Raiz(directorio d);
 
+directorio create_directorio(directorio d, char *cadena);;
+
+directorio busca_directorio(directorio d, char *parametro);
+
 void print_Directorio(directorio d);
 
 directorio CreateArchivoDirectorio(directorio d, char *nombreArchivo, int tamanio);

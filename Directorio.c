@@ -1,5 +1,6 @@
 #include <stddef.h>
 #include <stdio.h>
+#include <string.h>
 
 #include "Directorio.h"
 #include "Archivo.h"
@@ -32,43 +33,44 @@ directorio create_Raiz(directorio d){
 //---------------------------------------------------------------------
 
 directorio create_Directorio(directorio d, char *cadena){
-  char *path = strtok (cadena,"/");
-  if (parametro == NULL)
-    while (parametro != NULL){
-      char *nombreDirectorio;
-      strcpy(nombreDirectorio,parametro);
-      parametro = strtok(NULL,"/");
-      if (parametro != NULL)
-        d = busca_directorio (d, parametro);
+  char *parametro = strtok (cadena,"/");
+  char *nombreDir;
+  while (parametro != NULL){
+    strcpy(nombreDir,parametro);
+    parametro = strtok(NULL,"/");
+    if (parametro != NULL)
+      d = busca_directorio (d, parametro);
     }
     directorio aux = new (nodoDirectorio);
     if (d->hijo == NULL){
-      aux->nombreDirectorio = nombreDirectorio;
+      aux->nombreDirectorio = nombreDir;
       aux->a = NULL;
       aux->sig = NULL;
       aux->hijo = NULL;
       aux->padre = d;
       return d;
     }
-    else
+    else{
       aux = d->hijo;
-      while (d->hijo != NULL)
+      while (d->hijo != NULL){
         aux = aux->sig;
-      directorio aux1 = aux
-      aux->nombreDirectorio = nombreDirectorio;
+      }
+      directorio aux1 = aux;
+      aux->nombreDirectorio = nombreDir;
       aux->a = NULL;
       aux->sig = NULL;
       aux->hijo = NULL;
       aux->padre = d;
       aux1->sig = aux;
       return d;
+    }
+  return d;
 }
 
 //---------------------------------------------------------------------
 
 directorio busca_directorio(directorio d, char *parametro){
-
-  else if (strcmp(d->nombreDirectorio, parametro) == 0)
+  if (strcmp(d->nombreDirectorio, parametro) == 0)
     return d->hijo;
   else if(d->sig != NULL)
     return busca_directorio(d->sig, parametro);
