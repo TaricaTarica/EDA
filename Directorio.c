@@ -137,6 +137,15 @@ directorio BFDirectorio(directorio d, char *nombreArchivo, int k){
 //---------------------------------------------------------------------
 
 directorio CDdir (directorio d, char*nombreDir){
+	directorio auxdir= d;
+	if(d != NULL){
+		auxdir= busca_directorio(d, nombreDir);
+		if(auxdir!= NULL){ //lo encontre
+			auxdir= auxdir->
+		}
+
+	}
+
 }
 
 //---------------------------------------------------------------------

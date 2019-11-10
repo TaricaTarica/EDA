@@ -40,25 +40,36 @@ TipoRet MKDIR (Sistema &s, char *cadena){
 
 //---------------------------------------------------------------------
 
-TipoRet CD (Sistema &s, Cadena nombreDirectorio){
-	return NO_IMPLEMENTADA;
+TipoRet CD (Sistema &s, char* nombreDirectorio){
+	  if(s == NULL)
+	    return ERROR;
+	  else{
+	    Sistema sisAUX = s;
+	    if(sisAUX->d == NULL){
+	      return ERROR;
+	    }
+	    else{
+	      sisAUX->d = CDdir (sisAUX->dir_act, nombreDirectorio);
+		return OK;
+	    }
+	    return ERROR;
 }
 
 //---------------------------------------------------------------------
 
-TipoRet  PWD (Sistema &s, Cadena nombreDirectorio){
+TipoRet  PWD (Sistema &s, string nombreDirectorio){
 	return NO_IMPLEMENTADA	
 }
 
 //---------------------------------------------------------------------
 
-TipoRet RMDIR (Sistema &s, Cadena nombreDirectorio){
+TipoRet RMDIR (Sistema &s, string nombreDirectorio){
 	return NO_IMPLEMENTADA;
 }
 
 //---------------------------------------------------------------------
 
-TipoRet COPY(Sistema &s, Cadena directorio/archivoOrigen, Cadena directorioDestino){
+TipoRet COPY(Sistema &s, string archidirOrigen, string directorioDestino){
 	return NO_IMPLEMENTADA
 
 }
