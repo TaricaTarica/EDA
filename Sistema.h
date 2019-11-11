@@ -47,15 +47,15 @@ TipoRet UNDELETE (Sistema &s);
 TipoRet CD (Sistema &s, char* nombreDirectorio);
 //Este comando es el únicoque permite desplazarnos en la estructura de directorios, definiendo así al nuevo directorio actual.
 
-TipoRet  PWD (Sistema &s, string nombreDirectorio);
+TipoRet  PWD (Sistema &s, char* nombreDirectorio);
 //Este   comando   muestra   el   camino   desde   la RAIZal directorioactual siguiendo   el   formato: “/.../.../dirActual”.
 
-TipoRet RMDIR (Sistema &s, string nombreDirectorio);
+TipoRet RMDIR (Sistema &s, char* nombreDirectorio);
 //Este comando eliminaundirectorioespecificado por una ruta(relativa o absoluta) además de todos los subdirectoriosy archivosque éste contenga
 
-TipoRet COPY(Sistema &s, string archidirOrigen, string directorioDestino);
-//Este  comando copia  un  directorio  o  archivo desde  un directorioorigen  hacia  un directoriodestino. 
-//Tanto el directorio origen como el directorio destino pueden estar especificados por sus rutasya sean relativas o absolutas.  
-//Como  es  de  suponerse,  al  copiar  un directorio,su  estructura  de subdirectorios debería quedar inalterada. 
+TipoRet COPY(Sistema &s, char* archidirOrigen, char* directorioDestino);
+//Este  comando copia  un  directorio  o  archivo desde  un directorioorigen  hacia  un directoriodestino.
+//Tanto el directorio origen como el directorio destino pueden estar especificados por sus rutasya sean relativas o absolutas.
+//Como  es  de  suponerse,  al  copiar  un directorio,su  estructura  de subdirectorios debería quedar inalterada.
 
 #endif

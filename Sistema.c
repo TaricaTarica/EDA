@@ -30,10 +30,9 @@ TipoRet MKDIR (Sistema &s, char *cadena){
     Sistema sisAUX = s;
     if(sisAUX->d == NULL)
       return ERROR;
-  else{
-    Sistema sisAUX = s;
-    sisAUX->d = create_directorio(sisAUX->d, cadena);
-    return OK;
+    else{
+      sisAUX->d = create_Directorio(sisAUX->d, cadena);
+      return OK;
     }
   }
 }
@@ -53,24 +52,25 @@ TipoRet CD (Sistema &s, char* nombreDirectorio){
 		return OK;
 	    }
 	    return ERROR;
+    }
 }
 
 //---------------------------------------------------------------------
 
-TipoRet  PWD (Sistema &s, string nombreDirectorio){
-	return NO_IMPLEMENTADA	
-}
-
-//---------------------------------------------------------------------
-
-TipoRet RMDIR (Sistema &s, string nombreDirectorio){
+TipoRet  PWD (Sistema &s, char* nombreDirectorio){
 	return NO_IMPLEMENTADA;
 }
 
 //---------------------------------------------------------------------
 
-TipoRet COPY(Sistema &s, string archidirOrigen, string directorioDestino){
-	return NO_IMPLEMENTADA
+TipoRet RMDIR (Sistema &s, char* nombreDirectorio){
+	return NO_IMPLEMENTADA;
+}
+
+//---------------------------------------------------------------------
+
+TipoRet COPY(Sistema &s, char* archidirOrigen, char* directorioDestino){
+	return NO_IMPLEMENTADA;
 
 }
 

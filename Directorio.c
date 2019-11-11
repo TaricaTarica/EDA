@@ -1,6 +1,7 @@
 #include <stddef.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 #include "Directorio.h"
 #include "Archivo.h"
@@ -33,37 +34,51 @@ directorio create_Raiz(directorio d){
 //---------------------------------------------------------------------
 
 directorio create_Directorio(directorio d, char *cadena){
-  char *parametro = strtok (cadena,"/");
-  char *nombreDir;
-  while (parametro != NULL){
+  printf("ENTRA A LA FUNCION");
+  char *nombreDir = new char[strlen(cadena) + 1];
+  char *parametro = new char[strlen(cadena) + 1];
+  parametro = strtok (cadena,"/");
+  printf ("%s",parametro);
+  strcpy(nombreDir,parametro);
+  directorio dAUX = d;
+  while (dAUX != NULL){
+    printf("--");
     strcpy(nombreDir,parametro);
     parametro = strtok(NULL,"/");
-    if (parametro != NULL)
-      d = busca_directorio (d, parametro);
+    printf ("%s",parametro);
+    if (parametro != NULL){
+      dAUX = busca_directorio (dAUX, parametro); //la función retorna null. puede que esté mal buscaDirectorio.
+      strcpy(nombreDir,parametro);
+    }//de acá parriba ok,
+  }
+  printf ("%s",nombreDir);
+
+  directorio aux = new (nodoDirectorio);
+  if (dAUX == NULL){
+    aux->nombreDirectorio = new char[strlen(nombreDir) + 1]; //FALTABA ESTO°°
+    strcpy(aux->nombreDirectorio, nombreDir);
+    aux->a = NULL;
+    aux->sig = NULL;
+    aux->hijo = NULL;
+    aux->padre = d;
+    d->hijo = aux;
+    return d;
+  }
+  else{
+    aux = d->hijo;
+    while (d->hijo != NULL){
+      aux = aux->sig;
     }
-    directorio aux = new (nodoDirectorio);
-    if (d->hijo == NULL){
-      aux->nombreDirectorio = nombreDir;
-      aux->a = NULL;
-      aux->sig = NULL;
-      aux->hijo = NULL;
-      aux->padre = d;
-      return d;
-    }
-    else{
-      aux = d->hijo;
-      while (d->hijo != NULL){
-        aux = aux->sig;
-      }
-      directorio aux1 = aux;
-      aux->nombreDirectorio = nombreDir;
-      aux->a = NULL;
-      aux->sig = NULL;
-      aux->hijo = NULL;
-      aux->padre = d;
-      aux1->sig = aux;
-      return d;
-    }
+    directorio aux1 = aux;
+    aux->nombreDirectorio = new char[strlen(nombreDir) + 1]; //FALTABA ESTO°°
+    strcpy(aux->nombreDirectorio, cadena);
+    aux->a = NULL;
+    aux->sig = NULL;
+    aux->hijo = NULL;
+    aux->padre = d;
+    aux1->sig = aux;
+    return d;
+  }
   return d;
 }
 
@@ -74,25 +89,56 @@ directorio busca_directorio(directorio d, char *parametro){
     return d->hijo;
   else if(d->sig != NULL)
     return busca_directorio(d->sig, parametro);
-    else{
+  else{
       printf("no se encontró un directorio con ese nombre");
       return NULL;
-    }
+  }
 }
 
 //---------------------------------------------------------------------
 
 void print_Directorio(directorio d){
   directorio dirAUX = d;
-  do{
+  if(dirAUX != NULL){
     printf("+ %s", dirAUX->nombreDirectorio);
     printf("\n");
     printf("\t \t");
     print_Archivo(dirAUX->a);
+    if (dirAUX->hijo != NULL){
+      print_Directorio(dirAUX->hijo);
+    }
+    if(dirAUX->sig != NULL){
+      print_Directorio(dirAUX->sig);
+    }
+  }
+  if(dirAUX->sig != NULL){
     dirAUX = dirAUX->sig;
+    print_Directorio(dirAUX);
+  }
+}
+  /*do{
+    printf("+ %s", dirAUX->nombreDirectorio);
+    printf("\n");
+    printf("\t \t");
+    print_Archivo(dirAUX->a);
+    printf("+ %s", dirAUX->hijo->nombreDirectorio);
+    dirAUX->sig;
   }while (d->sig != NULL);
   printf("\n");
 }
+
+if(aux != NULL){
+    printf("- %s", aux->nombreArchivo);
+    printf("\n");
+    if (aux->sig != NULL){
+      aux = aux->sig;
+      printf("\t \t");
+      print_Archivo(aux);
+    }
+}
+else{
+  printf("\n");
+}*/
 
 //---------------------------------------------------------------------
 
@@ -137,15 +183,15 @@ directorio BFDirectorio(directorio d, char *nombreArchivo, int k){
 //---------------------------------------------------------------------
 
 directorio CDdir (directorio d, char*nombreDir){
-	directorio auxdir= d;
+	directorio auxdir = d;
 	if(d != NULL){
-		auxdir= busca_directorio(d, nombreDir);
-		if(auxdir!= NULL){ //lo encontre
-			auxdir= auxdir->
+		auxdir = busca_directorio(d, nombreDir);
+		if(auxdir != NULL){ //lo encontre
+			return auxdir; //si encontré el directorio entonces lo devuelvo.
 		}
-
 	}
-
+  else
+    return auxdir;
 }
 
 //---------------------------------------------------------------------
@@ -164,4 +210,3 @@ bool DIRpertenece (directorio d, char * nombreDir){
 		else return DIRpertenece(d->hijo, nombreDir) || DIRpertenece(d->sig, nombreDir);
 	}
 }
-

@@ -15,7 +15,7 @@ directorio insert_Directorio(directorio d, char *nDirectorio);
 
 directorio create_Raiz(directorio d);
 
-directorio create_directorio(directorio d, char *cadena);;
+directorio create_Directorio(directorio d, char *cadena);;
 
 directorio busca_directorio(directorio d, char *parametro);
 
