@@ -34,24 +34,24 @@ directorio create_Raiz(directorio d){
 //---------------------------------------------------------------------
 
 directorio create_Directorio(directorio d, char *cadena){
-  printf("ENTRA A LA FUNCION");
   char *nombreDir = new char[strlen(cadena) + 1];
   char *parametro = new char[strlen(cadena) + 1];
   parametro = strtok (cadena,"/");
   printf ("%s",parametro);
   strcpy(nombreDir,parametro);
   directorio dAUX = d;
+  //dAUX->nombreDirectorio= parametro;
   while (dAUX != NULL){
     printf("--");
     strcpy(nombreDir,parametro);
     parametro = strtok(NULL,"/");
-    printf ("%s",parametro);
+    printf ("parametro:%s\n",parametro);
     if (parametro != NULL){
+      printf ("nombredir:%s\n" , d->nombreDirectorio);
       dAUX = busca_directorio (dAUX, parametro); //la función retorna null. puede que esté mal buscaDirectorio.
       strcpy(nombreDir,parametro);
     }//de acá parriba ok,
   }
-  printf ("%s",nombreDir);
 
   directorio aux = new (nodoDirectorio);
   if (dAUX == NULL){
@@ -85,37 +85,37 @@ directorio create_Directorio(directorio d, char *cadena){
 //---------------------------------------------------------------------
 
 directorio busca_directorio(directorio d, char *parametro){
-  if (strcmp(d->nombreDirectorio, parametro) == 0)
-    return d->hijo;
-  else if(d->sig != NULL)
-    return busca_directorio(d->sig, parametro);
-  else{
-      printf("no se encontró un directorio con ese nombre");
-      return NULL;
-  }
+    if (strcmp(d->nombreDirectorio, parametro) == 0){
+      return d->hijo;
+      printf("aca entre?????\n");
+    }
+    else if(d->sig != NULL)
+      return busca_directorio(d->sig, parametro);
+    else{
+        printf("no se encontró un directorio con ese nombre");
+        return NULL;
+    }
+
 }
 
 //---------------------------------------------------------------------
 
 void print_Directorio(directorio d){
-  directorio dirAUX = d;
-  if(dirAUX != NULL){
-    printf("+ %s", dirAUX->nombreDirectorio);
+  //directorio dirAUX = d;
+  if(d != NULL){
+    printf("+ %s", d->nombreDirectorio);
     printf("\n");
     printf("\t \t");
-    print_Archivo(dirAUX->a);
-    if (dirAUX->hijo != NULL){
-      print_Directorio(dirAUX->hijo);
+    print_Archivo(d->a);
+    if (d->hijo != NULL){
+      print_Directorio(d->hijo);
     }
-    if(dirAUX->sig != NULL){
-      print_Directorio(dirAUX->sig);
+    if(d->sig != NULL){
+      print_Directorio(d->sig);
     }
-  }
-  if(dirAUX->sig != NULL){
-    dirAUX = dirAUX->sig;
-    print_Directorio(dirAUX);
   }
 }
+
   /*do{
     printf("+ %s", dirAUX->nombreDirectorio);
     printf("\n");
