@@ -66,6 +66,10 @@ int main(){
 			cout << "nombre del archivo: ";
 			cin >> parametro;
 			retorno = TYPE (s, parametro);
+		}else if (strcmp(comando,"CD") == 0){
+			cout << "ruta: ";
+			cin >> parametro;
+			retorno = CD (s, parametro);
 		}else if (strcmp(comando,"salir") == 0){
 			cout << "\t- CHAUUUUU!!!\n\n";
 			salir = true;

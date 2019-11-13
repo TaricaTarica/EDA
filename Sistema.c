@@ -31,8 +31,10 @@ TipoRet MKDIR (Sistema &s, char *cadena){
     if(sisAUX->d == NULL)
       return ERROR;
     else{
-      sisAUX->d = create_Directorio(sisAUX->d, cadena);
-      return OK;
+      if(createDirectorio(sisAUX->d,cadena))
+        return OK;
+      else
+        return ERROR;
     }
   }
 }
@@ -48,8 +50,8 @@ TipoRet CD (Sistema &s, char* nombreDirectorio){
 	      return ERROR;
 	    }
 	    else{
-	      sisAUX->d = CDdir (sisAUX->dir_act, nombreDirectorio);
-		return OK;
+	      sisAUX->dir_act = CDdir (sisAUX->d, nombreDirectorio);
+		    return OK;
 	    }
 	    return ERROR;
     }
@@ -58,7 +60,7 @@ TipoRet CD (Sistema &s, char* nombreDirectorio){
 //---------------------------------------------------------------------
 
 TipoRet  PWD (Sistema &s, char* nombreDirectorio){
-	return NO_IMPLEMENTADA;
+    return NO_IMPLEMENTADA;
 }
 
 //---------------------------------------------------------------------

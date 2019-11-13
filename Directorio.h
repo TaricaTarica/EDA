@@ -15,7 +15,7 @@ directorio insert_Directorio(directorio d, char *nDirectorio);
 
 directorio create_Raiz(directorio d);
 
-directorio create_Directorio(directorio d, char *cadena);;
+bool createDirectorio (directorio & d, char * path);
 
 directorio busca_directorio(directorio d, char *parametro);
 
@@ -33,7 +33,10 @@ directorio BFDirectorio(directorio d, char *nombreArchivo, int k);
 
 directorio CATDirectorio(directorio d, char *nombreArchivo1, char *nombreArchivo2);
 
+char* nombreDirectorio(directorio d); //retorna el nombre del directorio 
+
 bool DIRpertenece (directorio d, char * nombreDir);
 
 directorio CDdir (directorio d, char*nombreDir);
+
 #endif

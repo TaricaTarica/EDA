@@ -32,55 +32,51 @@ directorio create_Raiz(directorio d){
 }
 
 //---------------------------------------------------------------------
+bool createDirectorio (directorio & d,char * path){
+	directorio aux;
+	directorio iter = d;
+  char * elem = new char [strlen(path) + 1];
+  char * elemAUX = new char [strlen(path) + 1];
+  elemAUX = strtok (path,"/");
+  while (elemAUX != NULL){
+    elemAUX = strtok(NULL,"/");
+    if(elemAUX != NULL)
+      strcpy(elem,elemAUX);
+  } //obtengo el nombre del nuevo directorio
 
-directorio create_Directorio(directorio d, char *cadena){
-  char *nombreDir = new char[strlen(cadena) + 1];
-  char *parametro = new char[strlen(cadena) + 1];
-  parametro = strtok (cadena,"/");
-  printf ("%s",parametro);
-  strcpy(nombreDir,parametro);
-  directorio dAUX = d;
-  //dAUX->nombreDirectorio= parametro;
-  while (dAUX != NULL){
-    printf("--");
-    strcpy(nombreDir,parametro);
-    parametro = strtok(NULL,"/");
-    printf ("parametro:%s\n",parametro);
-    if (parametro != NULL){
-      printf ("nombredir:%s\n" , d->nombreDirectorio);
-      dAUX = busca_directorio (dAUX, parametro); //la función retorna null. puede que esté mal buscaDirectorio.
-      strcpy(nombreDir,parametro);
-    }//de acá parriba ok,
-  }
+  char * pch = strtok (path,"/");
+	while (pch != NULL)
+	{
+		while ((iter != NULL) && (strcmp (pch, iter->nombreDirectorio) != 0))
+				iter = iter->hijo;
+		if (iter == NULL)
+			return false;
+		pch = strtok (NULL, "/");
+		if (pch != NULL)
+			iter = iter->sig;
+	}
+  aux = new (nodoDirectorio);
+	aux->nombreDirectorio = new char [strlen(elem) + 1];
 
-  directorio aux = new (nodoDirectorio);
-  if (dAUX == NULL){
-    aux->nombreDirectorio = new char[strlen(nombreDir) + 1]; //FALTABA ESTO°°
-    strcpy(aux->nombreDirectorio, nombreDir);
-    aux->a = NULL;
-    aux->sig = NULL;
-    aux->hijo = NULL;
-    aux->padre = d;
-    d->hijo = aux;
-    return d;
-  }
-  else{
-    aux = d->hijo;
-    while (d->hijo != NULL){
-      aux = aux->sig;
-    }
-    directorio aux1 = aux;
-    aux->nombreDirectorio = new char[strlen(nombreDir) + 1]; //FALTABA ESTO°°
-    strcpy(aux->nombreDirectorio, cadena);
-    aux->a = NULL;
-    aux->sig = NULL;
-    aux->hijo = NULL;
-    aux->padre = d;
-    aux1->sig = aux;
-    return d;
-  }
-  return d;
+  strcpy (aux->nombreDirectorio, elem);
+	aux->sig = NULL;
+	if (d == NULL)
+	{
+		aux->sig = NULL;
+		aux->hijo = NULL;
+		aux->padre = NULL;
+		d = aux;
+	}
+	else
+	{
+		aux->padre = iter;
+		aux->sig = NULL;
+		aux->hijo = iter->sig;
+		iter->sig = aux;
+	}
+	return true;
 }
+
 
 //---------------------------------------------------------------------
 
@@ -108,6 +104,7 @@ void print_Directorio(directorio d){
     printf("\t \t");
     print_Archivo(d->a);
     if (d->hijo != NULL){
+      printf("\t \t");
       print_Directorio(d->hijo);
     }
     if(d->sig != NULL){
@@ -183,22 +180,25 @@ directorio BFDirectorio(directorio d, char *nombreArchivo, int k){
 //---------------------------------------------------------------------
 
 directorio CDdir (directorio d, char*nombreDir){
-	directorio auxdir = d;
+	directorio iter = d;
+  char * pch = strtok(nombreDir, "/");
 	if(d != NULL){
-		auxdir = busca_directorio(d, nombreDir);
-		if(auxdir != NULL){ //lo encontre
-			return auxdir; //si encontré el directorio entonces lo devuelvo.
-		}
-	}
+    while (pch != NULL)
+    {
+      while ((iter != NULL) && (strcmp (pch, iter->nombreDirectorio) != 0))
+          iter = iter->hijo;
+      if (iter == NULL)
+        return d;
+      pch = strtok (NULL, "/");
+      if (pch != NULL)
+        iter = iter->sig;
+    }
+    return iter;
+  }
   else
-    return auxdir;
+    return d;
 }
 
-//---------------------------------------------------------------------
-/*directorio CATDirectorio(directorio d, char *nombreArchivo1, char *nombreArchivo2){
-  d->a = Concat(d->a, nombreArchivo1, nombreArchivo2);
-  return d;
-}*/
 
 //---------------------------------------------------------------------
 bool DIRpertenece (directorio d, char * nombreDir){
@@ -209,4 +209,8 @@ bool DIRpertenece (directorio d, char * nombreDir){
 			return true;
 		else return DIRpertenece(d->hijo, nombreDir) || DIRpertenece(d->sig, nombreDir);
 	}
+}
+//---------------------------------------------------------------------
+char* nombreDirectorio(directorio d){
+  return d->nombreDirectorio;
 }
