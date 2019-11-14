@@ -59,8 +59,20 @@ TipoRet CD (Sistema &s, char* nombreDirectorio){
 
 //---------------------------------------------------------------------
 
-TipoRet  PWD (Sistema &s, char* nombreDirectorio){
-    return NO_IMPLEMENTADA;
+TipoRet PWD(Sistema &s){
+  if(s == NULL)
+    return ERROR;
+  else{
+    Sistema sisAUX = s;
+    if(sisAUX->d == NULL){
+      return ERROR;
+    }
+    else{
+      PWDir (sisAUX->d, get_nDirectorio(sisAUX->dir_act));
+      return OK;
+    }
+    return ERROR;
+  }
 }
 
 //---------------------------------------------------------------------

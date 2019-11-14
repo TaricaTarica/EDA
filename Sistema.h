@@ -47,7 +47,7 @@ TipoRet UNDELETE (Sistema &s);
 TipoRet CD (Sistema &s, char* nombreDirectorio);
 //Este comando es el únicoque permite desplazarnos en la estructura de directorios, definiendo así al nuevo directorio actual.
 
-TipoRet  PWD (Sistema &s, char* nombreDirectorio);
+TipoRet PWD (Sistema &s);
 //Este   comando   muestra   el   camino   desde   la RAIZal directorioactual siguiendo   el   formato: “/.../.../dirActual”.
 
 TipoRet RMDIR (Sistema &s, char* nombreDirectorio);

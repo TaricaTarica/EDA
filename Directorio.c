@@ -113,30 +113,6 @@ void print_Directorio(directorio d){
   }
 }
 
-  /*do{
-    printf("+ %s", dirAUX->nombreDirectorio);
-    printf("\n");
-    printf("\t \t");
-    print_Archivo(dirAUX->a);
-    printf("+ %s", dirAUX->hijo->nombreDirectorio);
-    dirAUX->sig;
-  }while (d->sig != NULL);
-  printf("\n");
-}
-
-if(aux != NULL){
-    printf("- %s", aux->nombreArchivo);
-    printf("\n");
-    if (aux->sig != NULL){
-      aux = aux->sig;
-      printf("\t \t");
-      print_Archivo(aux);
-    }
-}
-else{
-  printf("\n");
-}*/
-
 //---------------------------------------------------------------------
 
 directorio CreateArchivoDirectorio(directorio d, char *nombreArchivo, int tamanio){
@@ -211,6 +187,21 @@ bool DIRpertenece (directorio d, char * nombreDir){
 	}
 }
 //---------------------------------------------------------------------
-char* nombreDirectorio(directorio d){
+char* get_nDirectorio(directorio d){
   return d->nombreDirectorio;
+}
+//---------------------------------------------------------------------
+void PWDir (directorio d, char * nombreDirectorio){
+  printf("%s/", get_nDirectorio(d));
+  while (d != NULL)
+  {
+    while ((d->hijo != NULL) && (strcmp (nombreDirectorio, d->nombreDirectorio) != 0)){
+        printf("ENTRO SEGUNDO WHILE");
+        d = d->hijo;
+        printf("%s/", get_nDirectorio(d));
+    }
+    d = d->sig;
+  }
+    if(strcmp("raiz",nombreDirectorio) != 0)
+      printf("%s/", nombreDirectorio);
 }

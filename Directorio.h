@@ -33,10 +33,12 @@ directorio BFDirectorio(directorio d, char *nombreArchivo, int k);
 
 directorio CATDirectorio(directorio d, char *nombreArchivo1, char *nombreArchivo2);
 
-char* nombreDirectorio(directorio d); //retorna el nombre del directorio 
+char* get_nDirectorio(directorio d); //retorna el nombre del directorio
 
 bool DIRpertenece (directorio d, char * nombreDir);
 
 directorio CDdir (directorio d, char*nombreDir);
+
+void PWDir (directorio d, char * nombreDirectorio);
 
 #endif

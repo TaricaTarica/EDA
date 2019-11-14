@@ -70,6 +70,8 @@ int main(){
 			cout << "ruta: ";
 			cin >> parametro;
 			retorno = CD (s, parametro);
+		}else if (strcmp(comando,"PWD") == 0){
+			retorno = PWD (s);
 		}else if (strcmp(comando,"salir") == 0){
 			cout << "\t- CHAUUUUU!!!\n\n";
 			salir = true;
