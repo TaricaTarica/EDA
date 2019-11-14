@@ -37,6 +37,7 @@ bool createDirectorio (directorio & d,char * path){
 	directorio iter = d;
   char * elem = new char [strlen(path) + 1];
   char * elemAUX = new char [strlen(path) + 1];
+  char * papi = new char [strlen(path) + 1];
   elemAUX = strtok (path,"/");
   while (elemAUX != NULL){
     elemAUX = strtok(NULL,"/");
@@ -48,15 +49,19 @@ bool createDirectorio (directorio & d,char * path){
 	while (pch != NULL)// creo q siempre esta tomando valr null despues de la primer pasada
 	{
     printf ("\n avance del strtok : %s\n", pch);//cuando sea algo del estilo /1/2/3 deberia imprimir 1 y 2, para meter el 2 en el while siguiente
-		while ((iter->hijo != NULL) && (strcmp (pch, iter->nombreDirectorio) != 0))//pero imprime solo el primero siempre (raiz)
-				iter = iter->hijo;//nunca esta avanzando en iter
+    printf("\n iter = %s \n", iter->nombreDirectorio);
+    while (strcmp (pch, iter->nombreDirectorio) != 0 && iter->sig != NULL){//pero imprime solo el primero siempre (raiz)
+        iter = iter->sig;
+    }
 		if (iter == NULL)
 			return false;
+    strcpy(papi ,iter->nombreDirectorio);
+    printf ("\n papi: %s", papi);
 		pch = strtok (NULL, "/");
-		//if (pch != NULL) -> segmentation fault
   }
   printf("\n elmento = %s", elem);//elemento sale bien, queda el nombre del nuevo subdir
   printf("\n iter = %s \n", iter->nombreDirectorio);//iter siempre es raiz, osea q siempre va a quedar raiz como padre de los subdir
+  printf ("\n papi: %s", papi);
   aux = new (nodoDirectorio);
 	aux->nombreDirectorio = new char [strlen(elem) + 1];
 
