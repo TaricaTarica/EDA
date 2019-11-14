@@ -39,11 +39,11 @@ archivo insert_Archivo(archivo a, char *nArchivo, int tamanio){
 void print_Archivo(archivo a){
   archivo aux = a;
   if(aux != NULL){
+      printf("\t \t");
       printf("- %s", aux->nombreArchivo);
       printf("\n");
       if (aux->sig != NULL){
         aux = aux->sig;
-        printf("\t \t");
         print_Archivo(aux);
       }
   }

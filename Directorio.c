@@ -45,34 +45,36 @@ bool createDirectorio (directorio & d,char * path){
   } //obtengo el nombre del nuevo directorio
 
   char * pch = strtok (path,"/");
-	while (pch != NULL)
+	while (pch != NULL)// creo q siempre esta tomando valr null despues de la primer pasada
 	{
-		while ((iter != NULL) && (strcmp (pch, iter->nombreDirectorio) != 0))
-				iter = iter->hijo;
+    printf ("\n avance del strtok : %s\n", pch);//cuando sea algo del estilo /1/2/3 deberia imprimir 1 y 2, para meter el 2 en el while siguiente
+		while ((iter->hijo != NULL) && (strcmp (pch, iter->nombreDirectorio) != 0))//pero imprime solo el primero siempre (raiz)
+				iter = iter->hijo;//nunca esta avanzando en iter
 		if (iter == NULL)
 			return false;
 		pch = strtok (NULL, "/");
-		if (pch != NULL)
-			iter = iter->sig;
-	}
+		//if (pch != NULL) -> segmentation fault
+  }
+  printf("\n elmento = %s", elem);//elemento sale bien, queda el nombre del nuevo subdir
+  printf("\n iter = %s \n", iter->nombreDirectorio);//iter siempre es raiz, osea q siempre va a quedar raiz como padre de los subdir
   aux = new (nodoDirectorio);
 	aux->nombreDirectorio = new char [strlen(elem) + 1];
 
   strcpy (aux->nombreDirectorio, elem);
 	aux->sig = NULL;
-	if (d == NULL)
+	if (iter->hijo == NULL)
 	{
-		aux->sig = NULL;
+		aux->sig = NULL;//cambie los = porq estaban entreverando cosas
 		aux->hijo = NULL;
 		aux->padre = NULL;
-		d = aux;
+		iter->hijo = aux;
 	}
 	else
 	{
 		aux->padre = iter;
-		aux->sig = NULL;
-		aux->hijo = iter->sig;
-		iter->sig = aux;
+		aux->sig = iter->hijo;
+		aux->hijo = NULL;
+		iter->hijo = aux;
 	}
 	return true;
 }
@@ -101,13 +103,17 @@ void print_Directorio(directorio d){
   if(d != NULL){
     printf("+ %s", d->nombreDirectorio);
     printf("\n");
-    printf("\t \t");
-    print_Archivo(d->a);
+    if (d->a != NULL){
+      print_Archivo(d->a);
+    }
     if (d->hijo != NULL){
       printf("\t \t");
+      printf("\n>>hijo != NULL %s \n", d->nombreDirectorio);//para ver si entra a crear un hijo
       print_Directorio(d->hijo);
     }
     if(d->sig != NULL){
+      printf("\n>> sig != NULL %s", d->nombreDirectorio);//para ver si entra a crear un hermano
+      printf("\n((aca tiene que entrar solo si creas un hermano))\n");
       print_Directorio(d->sig);
     }
   }
