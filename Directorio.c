@@ -74,7 +74,7 @@ bool createDirectorio (directorio & d,char * path){
 		aux->padre = NULL;
 		iter->hijo = aux;
 	}
-	else
+	if(aux->hijo!= NULL)
 	{
 		aux->padre = iter;
 		aux->sig = iter->hijo;
@@ -104,21 +104,19 @@ directorio busca_directorio(directorio d, char *parametro){
 //---------------------------------------------------------------------
 
 void print_Directorio(directorio d){
-  //directorio dirAUX = d;
+
   if(d != NULL){
-    printf("+ %s", d->nombreDirectorio);
+    printf("   + %s", d->nombreDirectorio);
     printf("\n");
     if (d->a != NULL){
       print_Archivo(d->a);
     }
     if (d->hijo != NULL){
-      printf("\t \t");
-      printf("\n>>hijo != NULL %s \n", d->nombreDirectorio);//para ver si entra a crear un hijo
+	printf("   ");
       print_Directorio(d->hijo);
     }
     if(d->sig != NULL){
-      printf("\n>> sig != NULL %s", d->nombreDirectorio);//para ver si entra a crear un hermano
-      printf("\n((aca tiene que entrar solo si creas un hermano))\n");
+	printf("   ");
       print_Directorio(d->sig);
     }
   }
@@ -216,3 +214,42 @@ void PWDir (directorio d, char * nombreDirectorio){
     if(strcmp("raiz",nombreDirectorio) != 0)
       printf("%s/", nombreDirectorio);
 }
+
+//---------------------------------------------------------------------
+ void RMDIR_dir(directorio d, char* nombreDirectorio){
+	char * elem = new char [strlen(nombreDirectorio) + 1];
+  	char * elemAUX = new char [strlen(nombreDirectorio) + 1];
+ 	char * papi = new char [strlen(nombreDirectorio) + 1];
+	directorio iter = d;
+	elemAUX = strtok (nombreDirectorio,"/");
+	if (d!=NULL){
+		  
+		  while (elemAUX != NULL){
+		    elemAUX = strtok(NULL,"/");
+		    if(elemAUX != NULL)
+		      strcpy(elem,elemAUX);
+		  } //obtengo el nombre del nuevo directorio
+
+		  char * pch = strtok (nombreDirectorio,"/");
+			while (pch != NULL)// creo q siempre esta tomando valr null despues de la primer pasada
+			{
+		    while (strcmp (pch, iter->nombreDirectorio) != 0 && iter->sig != NULL){//pero imprime solo el primero siempre (raiz)
+			iter = iter->sig;
+		    }
+		    strcpy(papi ,iter->nombreDirectorio);
+				pch = strtok (NULL, "/");
+		  }
+	   printf("nombredir= %s\n", papi);
+           printf("elem= %s\n", elem);
+	   delete elem;
+	   iter= d->padre;
+	   d->hijo= NULL;
+
+	   elem= NULL;
+           printf("elem ya borrado= %s\n", elem);
+            printf("elemAUX= %s\n", elemAUX);
+
+		  	
+	}
+	
+} 
