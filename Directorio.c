@@ -32,7 +32,75 @@ directorio create_Raiz(directorio d){
 }
 
 //---------------------------------------------------------------------
-bool createDirectorio (directorio & d,char * path){
+bool createDirectorio (directorio & d,char * parametro){
+    char * path = new char[MAX_PARAMETRO];
+		char * nombre = new char[MAX_PARAMETRO];
+		strcpy(path, "");
+		strcpy(nombre, "");
+		char primer_caracter = parametro[0];
+		char * pch = strtok (parametro,"/");
+		while (pch != NULL)
+		{
+			strcat(path, nombre);
+			strcat(path, "/");
+			strcpy(nombre, pch);
+			pch = strtok (NULL, "/");
+		}
+		if (primer_caracter != '/')
+		  path = &path[1];
+		path[strlen(path)-1] = '\0';
+		printf("path= %s", path);
+		printf("nombre= %s", nombre);
+    char * auxPATH = new char [strlen(path) + 1];
+    strcpy(auxPATH,path);
+    directorio aux;
+    directorio iter = d; //se que empieza en raiz, por eso apunto al hijo.
+    auxPATH = strtok (path,"/");
+    while(auxPATH != NULL){
+        auxPATH = strtok (NULL,"/");
+        if(auxPATH == NULL){
+          aux = new (nodoDirectorio);
+        	aux->nombreDirectorio = new char [strlen(nombre) + 1];
+          strcpy(aux->nombreDirectorio, nombre);
+          aux->sig = iter->hijo;
+          aux->padre = iter;
+          aux->hijo = NULL;
+          iter->hijo = aux;
+          return true;
+        }
+        else{
+          iter = iter ->hijo;
+          while(iter != NULL){
+            while(iter->sig != NULL && (strcmp(iter->nombreDirectorio, auxPATH) != 0)){
+              iter = iter->sig;
+            }
+            if(iter != NULL && (strcmp(iter->nombreDirectorio, auxPATH) == 0)){
+              auxPATH = strtok (NULL,"/");
+              if(auxPATH != NULL){
+                iter = iter->hijo;
+              }
+              else{
+                aux = new (nodoDirectorio);
+                aux->nombreDirectorio = new char [strlen(nombre) + 1];
+                strcpy(aux->nombreDirectorio, nombre);
+                aux->padre = iter;
+                aux->hijo = NULL;
+                iter->hijo = aux;
+                return true;
+              }
+            }
+            else{
+              return false;
+            }
+          }
+        }
+    }
+}
+
+
+
+/*
+  bool encontre = false;
 	directorio aux;
 	directorio iter = d;
   char * auxPATH = new char [strlen(path) + 1];
@@ -45,26 +113,25 @@ bool createDirectorio (directorio & d,char * path){
     elemAUX = strtok(NULL,"/");
     if(elemAUX != NULL)
       strcpy(elem,elemAUX);
-  //aca hay que poner el busca directorio para ver que no cree uno q ya existe
   } //obtengo el nombre del nuevo directorio
   printf("DIRECTORIO A INSERTAR: %s\n",elem);
   pch = strtok (auxPATH,"/");
   printf("PCH: %s\n", pch);
 	while (pch != NULL)
 	{
-		pch = strtok (NULL, "/");
-    while ((iter->sig != NULL) && (strcmp (pch, iter->nombreDirectorio) != 0) && (pch != NULL)/* && (strcmp (pch, elem) != 0)*/){
-        printf("PCH ES: %s\n", pch);
-        printf("ITER ES: %s\n",iter->nombreDirectorio);
-        printf("si entro aca deberia cambiar iter\n");
-        iter = iter->sig;
+    printf("ENTRO AL WHILE\n");
+		while((iter->hijo != NULL) && (strcmp (pch, iter->nombreDirectorio) != 0)){
+				iter = iter->hijo;
+        printf("ITER EN WHILE:%s\n",iter->nombreDirectorio);
+        encontre = true;
     }
 		if (iter == NULL)
 			return false;
+		pch = strtok (NULL, "/");
     printf("PCH : %s\n", pch);
-		if ((pch != NULL) && (strcmp(elem, pch) != 0)){
-      printf("ENTRO IF");
-		  iter = iter->hijo;
+		if ((pch != NULL) && ((strcmp(pch, elem) != 0)) && (iter->sig != NULL)){
+      printf("ENTRO IF\n");
+		  iter = iter->sig;
       printf("ITER ES: %s\n",iter->nombreDirectorio);
     }
 
@@ -74,25 +141,24 @@ bool createDirectorio (directorio & d,char * path){
   aux = new (nodoDirectorio);
 	aux->nombreDirectorio = new char [strlen(elem) + 1];
   strcpy (aux->nombreDirectorio, elem);
-	aux->hijo = NULL;
+	aux->sig = NULL;
 	if (d == NULL)
 	{
-		aux->hijo = NULL;
 		aux->sig = NULL;
+		aux->hijo = NULL;
 		aux->padre = NULL;
 		d = aux;
 	}
 	else
 	{
 		aux->padre = iter;
-		aux->hijo = NULL;
-		aux->sig = iter->hijo;
-		iter->hijo = aux;
+		aux->sig = NULL;
+		aux->hijo = iter->sig;
+		iter->sig = aux;
 	}
 	return true;
 }
-
-
+*/
 
 //---------------------------------------------------------------------
 
@@ -119,13 +185,13 @@ void print_Directorio(directorio d){
     printf("\n");
     printf("\t \t");
     print_Archivo(d->a);
-    if (d->hijo != NULL){
+    if (d->sig != NULL){
       printf("\t \t");
-      printf("hijo de %s : ", d->nombreDirectorio);
-      print_Directorio(d->hijo);
-    }
-    if(d->sig != NULL){
       print_Directorio(d->sig);
+    }
+    if(d->hijo != NULL){
+      printf("\t \t");
+      print_Directorio(d->hijo);
     }
   }
 }
@@ -179,12 +245,12 @@ directorio CDdir (directorio d, char*nombreDir){
     while (pch != NULL)
     {
       while ((iter != NULL) && (strcmp (pch, iter->nombreDirectorio) != 0))
-          iter = iter->hijo;
+          iter = iter->sig;
       if (iter == NULL)
         return d;
       pch = strtok (NULL, "/");
       if (pch != NULL)
-        iter = iter->sig;
+        iter = iter->hijo;
     }
     return iter;
   }
@@ -212,52 +278,12 @@ void PWDir (directorio d, char * nombreDirectorio){
   printf("%s/", get_nDirectorio(d));
   while (d != NULL)
   {
-    while ((d->hijo != NULL) && (strcmp (nombreDirectorio, d->nombreDirectorio) != 0)){
-        printf("ENTRO SEGUNDO WHILE");
-        d = d->hijo;
+    while ((d->sig != NULL) && (strcmp (nombreDirectorio, d->nombreDirectorio) != 0)){
+        d = d->sig;
         printf("%s/", get_nDirectorio(d));
     }
-    d = d->sig;
+    d = d->hijo;
   }
     if(strcmp("raiz",nombreDirectorio) != 0)
       printf("%s/", nombreDirectorio);
-}
-
-//---------------------------------------------------------------------
- void RMDIR_dir(directorio d, char* nombreDirectorio){
-	char * elem = new char [strlen(nombreDirectorio) + 1];
-  	char * elemAUX = new char [strlen(nombreDirectorio) + 1];
- 	char * papi = new char [strlen(nombreDirectorio) + 1];
-	directorio iter = d;
-	elemAUX = strtok (nombreDirectorio,"/");
-	if (d!=NULL){
-
-		  while (elemAUX != NULL){
-		    elemAUX = strtok(NULL,"/");
-		    if(elemAUX != NULL)
-		      strcpy(elem,elemAUX);
-		  } //obtengo el nombre del nuevo directorio
-
-		  char * pch = strtok (nombreDirectorio,"/");
-			while (pch != NULL)// creo q siempre esta tomando valr null despues de la primer pasada
-			{
-		    while (strcmp (pch, iter->nombreDirectorio) != 0 && iter->sig != NULL){//pero imprime solo el primero siempre (raiz)
-			iter = iter->sig;
-		    }
-		    strcpy(papi ,iter->nombreDirectorio);
-				pch = strtok (NULL, "/");
-		  }
-	   printf("nombredir= %s\n", papi);
-           printf("elem= %s\n", elem);
-	   delete elem;
-	   iter= d->padre;
-	   d->hijo= NULL;
-
-	   elem= NULL;
-           printf("elem ya borrado= %s\n", elem);
-            printf("elemAUX= %s\n", elemAUX);
-
-
-	}
-
 }
