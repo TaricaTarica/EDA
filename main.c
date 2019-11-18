@@ -70,10 +70,6 @@ int main(){
 			cout << "ruta: ";
 			cin >> parametro;
 			retorno = CD (s, parametro);
-		}else if (strcmp(comando,"RMDIR") == 0){
-			cout << "ruta: ";
-			cin >> parametro;
-			retorno = RMDIR (s, parametro);
 		}else if (strcmp(comando,"PWD") == 0){
 			retorno = PWD (s);
 		}else if (strcmp(comando,"salir") == 0){
