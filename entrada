@@ -1,0 +1,7 @@
+MKDIR
+/raiz/hijo
+MKDIR
+/raiz/hermano
+MKDIR
+/raiz/hijo/nieto
+SALIR

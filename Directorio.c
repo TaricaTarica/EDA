@@ -45,18 +45,22 @@ bool createDirectorio (directorio & d,char * path){
     elemAUX = strtok(NULL,"/");
     if(elemAUX != NULL)
       strcpy(elem,elemAUX);
+  //aca hay que poner el busca directorio para ver que no cree uno q ya existe
   } //obtengo el nombre del nuevo directorio
   printf("DIRECTORIO A INSERTAR: %s\n",elem);
   pch = strtok (auxPATH,"/");
   printf("PCH: %s\n", pch);
 	while (pch != NULL)
 	{
-    printf("ENTRO AL WHILE\n");
-		while ((iter->sig != NULL) && (strcmp (pch, iter->nombreDirectorio) != 0))
-				iter = iter->sig;
+		pch = strtok (NULL, "/");
+    while ((iter->sig != NULL) && (strcmp (pch, iter->nombreDirectorio) != 0) && (pch != NULL)/* && (strcmp (pch, elem) != 0)*/){
+        printf("PCH ES: %s\n", pch);
+        printf("ITER ES: %s\n",iter->nombreDirectorio);
+        printf("si entro aca deberia cambiar iter\n");
+        iter = iter->sig;
+    }
 		if (iter == NULL)
 			return false;
-		pch = strtok (NULL, "/");
     printf("PCH : %s\n", pch);
 		if ((pch != NULL) && (strcmp(elem, pch) != 0)){
       printf("ENTRO IF");
