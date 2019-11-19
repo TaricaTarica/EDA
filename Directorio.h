@@ -41,4 +41,6 @@ directorio CDdir (directorio d, char*nombreDir);
 
 void PWDir (directorio d, char * nombreDirectorio);
 
+bool RMDIR_dir(directorio d, char* parametro);
+
 #endif
