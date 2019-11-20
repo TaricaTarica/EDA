@@ -15,7 +15,7 @@ directorio insert_Directorio(directorio d, char *nDirectorio);
 
 directorio create_Raiz(directorio d);
 
-bool createDirectorio (directorio & d, char * path);
+bool createDirectorio (directorio & d, char * parametro);
 
 directorio busca_directorio(directorio d, char *parametro);
 
@@ -41,6 +41,6 @@ directorio CDdir (directorio d, char*nombreDir);
 
 void PWDir (directorio d, char * nombreDirectorio);
 
-void RMDIR_dir(directorio d, char* nombreDirectorio);
+directorio RMDIR_dir(directorio d, char* parametro);
 
 #endif
