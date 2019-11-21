@@ -19,7 +19,7 @@ bool createDirectorio (directorio & d, char * parametro);
 
 directorio busca_directorio(directorio d, char *parametro);
 
-void print_Directorio(directorio d);
+void print_Directorio(directorio d, int cont);
 
 directorio CreateArchivoDirectorio(directorio d, char *nombreArchivo, int tamanio);
 
@@ -41,6 +41,6 @@ directorio CDdir (directorio d, char*nombreDir);
 
 void PWDir (directorio d, char * nombreDirectorio);
 
-directorio RMDIR_dir(directorio d, char* parametro);
+bool RMDIR_dir(directorio &d, char* parametro);
 
 #endif

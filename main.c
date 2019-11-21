@@ -28,35 +28,10 @@ int main(){
 			cout << "tamanio: ";
 			cin >> parametro_num;
 			retorno = CREATE (s, parametro, parametro_num);
-		}else if (strcasecmp(comando,"MKDIR") == 0){
+		}else if (strcmp(comando,"MKDIR") == 0){
 			cout << "ruta: ";
 			cin >> parametro;
-			/* lo que me dijo el zabalsa, path guarda la cadena y nombre el elemento a insert_Archivo
-					anda rico, pero hay que ver como meterlo en la funcion, esta en el main para probarlo nomas.
-					se podria saltar el paso de agarrar elem al principio,
-			char * path = new char[MAX_PARAMETRO];
-			char * nombre = new char[MAX_PARAMETRO];
-			strcpy(path, "");
-			strcpy(nombre, "");
-			char primer_caracter = parametro[0];
-			char * pch = strtok (parametro,"/");
-			while (pch != NULL)
-			{
-				strcat(path, nombre);
-				strcat(path, "/");
-				strcpy(nombre, pch);
-				pch = strtok (NULL, "/");
-			}
-
-			if (primer_caracter != '/')
-			path = &path[1];
-			path[strlen(path)-1] = '\0';
-
-		cout << "path=" << path << endl;
-		cout << "nombre=" << nombre << endl;
-		*/
-
-//			retorno = MKDIR (s, parametro);
+			retorno = MKDIR (s, parametro);
 		}else if (strcmp(comando,"DELETE") == 0){
 			cout << "nombre del archivo: ";
 			cin >> parametro;
@@ -95,10 +70,6 @@ int main(){
 			cout << "ruta: ";
 			cin >> parametro;
 			retorno = CD (s, parametro);
-		}else if (strcmp(comando,"RMDIR") == 0){
-			cout << "ruta: ";
-			cin >> parametro;
-			retorno = RMDIR (s, parametro);
 		}else if (strcmp(comando,"PWD") == 0){
 			retorno = PWD (s);
 		}else if (strcmp(comando,"salir") == 0){

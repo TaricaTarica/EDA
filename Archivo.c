@@ -36,19 +36,23 @@ archivo insert_Archivo(archivo a, char *nArchivo, int tamanio){
 
 //---------------------------------------------------------------------
 
-void print_Archivo(archivo a){
+void print_Archivo(archivo a, int cont){
   archivo aux = a;
   if(aux != NULL){
-      printf("\t \t");
-      printf("- %s", aux->nombreArchivo);
-      printf("\n");
-      if (aux->sig != NULL){
-        aux = aux->sig;
-        print_Archivo(aux);
+    for (int auxcont = cont  ; auxcont > 0 ; auxcont --){
+      if (auxcont > 1){
+        printf ("\t");
       }
-  }
-  else{
+      else{
+        printf("╘─────");
+      }
+    }
+    printf("+ %s", aux->nombreArchivo);
     printf("\n");
+    if (aux->sig != NULL){
+      aux = aux->sig;
+      print_Archivo(aux, cont);
+    }
   }
 }
 

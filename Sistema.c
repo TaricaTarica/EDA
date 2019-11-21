@@ -78,19 +78,7 @@ TipoRet PWD(Sistema &s){
 //---------------------------------------------------------------------
 
 TipoRet RMDIR (Sistema &s, char* nombreDirectorio){
-	if(s == NULL)
-	    return ERROR;
-	else{
-	    Sistema sisAUX = s;
-	    if(sisAUX->d == NULL){
-	      return ERROR;
-	}
-	else{
-	      RMDIR_dir(sisAUX->d,nombreDirectorio);
-	      return OK;
-	}
-	    return ERROR;
-	  }
+	return NO_IMPLEMENTADA;
 }
 
 //---------------------------------------------------------------------
@@ -111,7 +99,7 @@ TipoRet DIR (Sistema &s){
       if(sisAUX->d == NULL)
         return ERROR;
       else{
-        print_Directorio(sisAUX->d);
+        print_Directorio(sisAUX->d, 0);
         return OK;
       }
     }
