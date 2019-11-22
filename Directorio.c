@@ -145,14 +145,13 @@ void print_Directorio(directorio d, int cont){
       printf ("\t");
     }
     else{
-      printf("╘───────");
+      printf("└───────");
     }
   }
   printf("► %s", d->nombreDirectorio);
   printf("\n");
   cont ++;
   if (d->a != NULL){
-    printf("%s: ", d->nombreDirectorio );
     print_Archivo(d->a, cont);
   }
   if (d->hijo != NULL){

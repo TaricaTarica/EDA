@@ -44,7 +44,7 @@ void print_Archivo(archivo a, int cont){
         printf ("\t");
       }
       else{
-        printf("╘─────");
+        printf("└───────");
       }
     }
     printf("+ %s", aux->nombreArchivo);
