@@ -240,6 +240,14 @@ if(iter != NULL){
   return d;
 } //mirá qué código papá
 
+//---------------------------------------------------------------------
+
+ directorio CDpadredir (directorio d){
+   if (d->padre != NULL)
+    return d->padre;
+  else
+    return d;
+ }
 
 //---------------------------------------------------------------------
 bool DIRpertenece (directorio d, char * nombreDir){
@@ -257,18 +265,11 @@ char* get_nDirectorio(directorio d){
 }
 //---------------------------------------------------------------------
 void PWDir (directorio d, char * nombreDirectorio){
-  printf("%s/", get_nDirectorio(d));
-  while (d != NULL)
-  {
-    while ((d->hijo != NULL) && (strcmp (nombreDirectorio, d->nombreDirectorio) != 0)){
-        printf("ENTRO SEGUNDO WHILE");
-        d = d->hijo;
-        printf("%s/", get_nDirectorio(d));
-    }
-    d = d->sig;
+
+  if (d->padre != NULL){
+    PWDir(d->padre, nombreDirectorio);
   }
-    if(strcmp("raiz",nombreDirectorio) != 0)
-      printf("%s/", nombreDirectorio);
+  printf("/%s", d->nombreDirectorio);
 }
 
 //---------------------------------------------------------------------

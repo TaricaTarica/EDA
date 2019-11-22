@@ -39,6 +39,8 @@ bool DIRpertenece (directorio d, char * nombreDir);
 
 directorio CDdir (directorio d, char*nombreDir);
 
+directorio CDpadredir (directorio d);
+
 void PWDir (directorio d, char * nombreDirectorio);
 
 bool RMDIR_dir(directorio &d, char* parametro);

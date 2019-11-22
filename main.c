@@ -70,6 +70,8 @@ int main(){
 			cout << "ruta: ";
 			cin >> parametro;
 			retorno = CD (s, parametro);
+		}else if (strcmp(comando,"CD..") == 0){
+			retorno = CDpadre(s);
 		}else if (strcmp(comando,"PWD") == 0){
 			retorno = PWD (s);
 		}else if (strcmp(comando,"salir") == 0){
