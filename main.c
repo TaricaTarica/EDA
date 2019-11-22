@@ -36,6 +36,10 @@ int main(){
 			cout << "nombre del archivo: ";
 			cin >> parametro;
 			retorno = DELETE (s, parametro);
+		}else if (strcmp(comando,"RMDIR") == 0){
+			cout << "ruta: ";
+			cin >> parametro;
+			retorno = RMDIR (s, parametro);
 		}/*else if (strcmp(comando,"UNDELETE") == 0){
 			retorno = UNDELETE (s);
 		}else if (strcmp(comando,"IC") == 0){

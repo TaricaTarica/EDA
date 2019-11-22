@@ -307,6 +307,7 @@ bool RMDIR_dir(directorio &d, char* parametro){
 		  printf("-Directorio %s eliminado con exito\n", soyHijo->nombreDirectorio);
 		  soyHijo=NULL;
 		  soyTuPadre->hijo= NULL;
+		  return true;
 		}
 		else{
 		  soyTuPadre = soyTuPadre ->hijo;
@@ -324,7 +325,7 @@ bool RMDIR_dir(directorio &d, char* parametro){
 			soyHijo->sig = NULL;
 			soyHijo->padre = soyTuPadre;
 			soyTuPadre->hijo = soyHijo;
-			printf("-Directorio %s eliminado con exito\n", soyHijo->nombreDirectorio);
+			printf("-Directorio %s eliminado con exito\n", soyHijo->nombreDirectorio);	
 			delete (soyHijo);
 			soyHijo=NULL;
 			soyTuPadre->hijo= NULL;
@@ -332,7 +333,9 @@ bool RMDIR_dir(directorio &d, char* parametro){
 		      }
 		   }
 		  }
-		    }
-      }
-  return 0;
+		}
+             }
+	      
+	return 0;
 }
+
