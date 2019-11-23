@@ -1,7 +1,9 @@
 MKDIR
-/raiz/hijo
+/raiz/carpeta
 MKDIR
-/raiz/hermano
+/raiz/carpeta/hijo
 MKDIR
-/raiz/hijo/nieto
+/raiz/carpeta/hermano
+RMDIR
+/raiz/carpeta/hermano
 SALIR

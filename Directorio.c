@@ -300,14 +300,14 @@ bool RMDIR_dir(directorio &d, char* parametro){
 	    while(auxPATH != NULL){
 		auxPATH = strtok (NULL,"/");
 		if(auxPATH == NULL){
-		  soyHijo->padre = soyTuPadre;
-		  soyHijo->hijo = NULL;
-		  soyTuPadre->hijo = soyHijo;
-		  delete soyHijo;
-		  printf("-Directorio %s eliminado con exito\n", soyHijo->nombreDirectorio);
-		  soyHijo=NULL;
-		  soyTuPadre->hijo= NULL;
-		  return true;
+		  soyHijo->sig = soyTuPadre->hijo->sig; //guardo el hermano
+			soyHijo->padre = soyTuPadre; //guardo al padre
+			soyTuPadre->hijo = soyHijo; //guardo al hijo actual (el que quiero eliminar)
+			printf("-Directorio %s eliminado con exito\n", soyHijo->nombreDirectorio);	
+			delete (soyHijo);		
+			soyHijo=NULL;
+			soyTuPadre->hijo=soyTuPadre->hijo->sig ;
+			return true;
 		}
 		else{
 		  soyTuPadre = soyTuPadre ->hijo;
@@ -316,19 +316,18 @@ bool RMDIR_dir(directorio &d, char* parametro){
 		      soyTuPadre = soyTuPadre->sig;
 		    }
 		    if(soyTuPadre != NULL && (strcmp(soyTuPadre->nombreDirectorio, auxPATH) == 0)){
-
 		      auxPATH = strtok (NULL,"/");
 		      if(auxPATH != NULL){
 			soyTuPadre = soyTuPadre->hijo;
 		      }
 		      else{
-			soyHijo->sig = NULL;
-			soyHijo->padre = soyTuPadre;
-			soyTuPadre->hijo = soyHijo;
+			soyHijo->sig = soyTuPadre->hijo->sig; //guardo el hermano
+			soyHijo->padre = soyTuPadre; //guardo al padre
+			soyTuPadre->hijo = soyHijo; //guardo al hijo actual (el que quiero eliminar)
 			printf("-Directorio %s eliminado con exito\n", soyHijo->nombreDirectorio);	
-			delete (soyHijo);
+			delete (soyHijo);		
 			soyHijo=NULL;
-			soyTuPadre->hijo= NULL;
+			soyTuPadre->hijo=soyTuPadre->hijo->sig ;
 			return true;
 		      }
 		   }
