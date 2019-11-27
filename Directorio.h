@@ -19,7 +19,7 @@ bool createDirectorio (directorio & d, char * parametro);
 
 directorio busca_directorio(directorio d, char *parametro);
 
-void print_Directorio(directorio d);
+void print_Directorio(directorio d, int cont);
 
 directorio CreateArchivoDirectorio(directorio d, char *nombreArchivo, int tamanio);
 
@@ -38,6 +38,8 @@ char* get_nDirectorio(directorio d); //retorna el nombre del directorio
 bool DIRpertenece (directorio d, char * nombreDir);
 
 directorio CDdir (directorio d, char*nombreDir);
+
+directorio CDpadredir (directorio d);
 
 void PWDir (directorio d, char * nombreDirectorio);
 

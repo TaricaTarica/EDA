@@ -36,6 +36,10 @@ int main(){
 			cout << "nombre del archivo: ";
 			cin >> parametro;
 			retorno = DELETE (s, parametro);
+		}else if (strcmp(comando,"RMDIR") == 0){
+			cout << "ruta: ";
+			cin >> parametro;
+			retorno = RMDIR (s, parametro);
 		}/*else if (strcmp(comando,"UNDELETE") == 0){
 			retorno = UNDELETE (s);
 		}else if (strcmp(comando,"IC") == 0){
@@ -70,6 +74,8 @@ int main(){
 			cout << "ruta: ";
 			cin >> parametro;
 			retorno = CD (s, parametro);
+		}else if (strcmp(comando,"CD..") == 0){
+			retorno = CDpadre(s);
 		}else if (strcmp(comando,"PWD") == 0){
 			retorno = PWD (s);
 		}else if (strcmp(comando,"salir") == 0){

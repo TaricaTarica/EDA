@@ -1,0 +1,9 @@
+MKDIR
+/raiz/carpeta
+MKDIR
+/raiz/carpeta/hijo
+MKDIR
+/raiz/carpeta/hermano
+RMDIR
+/raiz/carpeta/hermano
+SALIR

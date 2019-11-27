@@ -46,15 +46,33 @@ TipoRet CD (Sistema &s, char* nombreDirectorio){
 	    return ERROR;
 	  else{
 	    Sistema sisAUX = s;
-	    if(sisAUX->d == NULL){
+	    if(sisAUX->dir_act == NULL){
 	      return ERROR;
 	    }
 	    else{
-	      sisAUX->dir_act = CDdir (sisAUX->d, nombreDirectorio);
+	      sisAUX->dir_act = CDdir (sisAUX->dir_act, nombreDirectorio);
 		    return OK;
 	    }
 	    return ERROR;
     }
+}
+
+//---------------------------------------------------------------------
+
+TipoRet CDpadre (Sistema &s){
+  if(s == NULL)
+    return ERROR;
+  else{
+    Sistema sisAUX = s;
+    if(sisAUX->dir_act == NULL){
+      return ERROR;
+    }
+    else{
+      sisAUX->dir_act = CDpadredir (sisAUX->dir_act);
+      return OK;
+    }
+    return ERROR;
+  }
 }
 
 //---------------------------------------------------------------------
@@ -68,7 +86,7 @@ TipoRet PWD(Sistema &s){
       return ERROR;
     }
     else{
-      PWDir (sisAUX->d, get_nDirectorio(sisAUX->dir_act));
+      PWDir (sisAUX->dir_act, get_nDirectorio(sisAUX->dir_act));
       return OK;
     }
     return ERROR;
@@ -78,7 +96,19 @@ TipoRet PWD(Sistema &s){
 //---------------------------------------------------------------------
 
 TipoRet RMDIR (Sistema &s, char* nombreDirectorio){
-	return NO_IMPLEMENTADA;
+	if(s == NULL)
+	    return ERROR;
+	else{
+	    Sistema sisAUX = s;
+	    if(sisAUX->d == NULL){
+	      return ERROR;
+	}
+	else{
+	      RMDIR_dir(sisAUX->d,nombreDirectorio);
+	      return OK;
+	}
+	    return ERROR;
+	  }
 }
 
 //---------------------------------------------------------------------
@@ -99,7 +129,7 @@ TipoRet DIR (Sistema &s){
       if(sisAUX->d == NULL)
         return ERROR;
       else{
-        print_Directorio(sisAUX->d);
+        print_Directorio(sisAUX->d, 0);
         return OK;
       }
     }
@@ -112,11 +142,11 @@ TipoRet CREATE (Sistema &s, char *nombreArchivo, int tamanio){
     return ERROR;
   else{
     Sistema sisAUX = s;
-    if(sisAUX->d == NULL){
+    if(sisAUX->dir_act == NULL){
       return ERROR;
     }
     else{
-      sisAUX->d = CreateArchivoDirectorio(sisAUX->d, nombreArchivo, tamanio);
+      sisAUX->dir_act = CreateArchivoDirectorio(sisAUX->dir_act, nombreArchivo, tamanio);
       return OK;
     }
   }
@@ -129,11 +159,11 @@ TipoRet IF (Sistema &s, char *nombreArchivo, char *texto){
     return ERROR;
   else{
     Sistema sisAUX = s;
-    if(sisAUX->d == NULL){
+    if(sisAUX->dir_act == NULL){
       return ERROR;
     }
     else{
-      sisAUX->d = IFDirectorio(sisAUX->d, nombreArchivo, texto);
+      sisAUX->dir_act = IFDirectorio(sisAUX->dir_act, nombreArchivo, texto);
         return OK;
     }
     return ERROR;
@@ -148,11 +178,11 @@ TipoRet TYPE (Sistema &s, char *nombreArchivo){ //me calente y me fui a comer
     return ERROR;
   else{
     Sistema sisAUX = s;
-    if(sisAUX->d == NULL){
+    if(sisAUX->dir_act == NULL){
       return ERROR;
     }
     else{
-      sisAUX->d = TYPEDirectorio(sisAUX->d, nombreArchivo);
+      sisAUX->dir_act= TYPEDirectorio(sisAUX->dir_act, nombreArchivo);
       return OK;
     }
     return ERROR;
@@ -167,11 +197,11 @@ TipoRet DELETE (Sistema &s, char *nombreArchivo){
     return ERROR;
   else{
     Sistema sisAUX = s;
-    if(sisAUX->d == NULL){
+    if(sisAUX->dir_act == NULL){
       return ERROR;
     }
     else{
-      sisAUX->d = DELETEArchivoDirectorio(sisAUX->d, nombreArchivo);
+      sisAUX->dir_act = DELETEArchivoDirectorio(sisAUX->dir_act, nombreArchivo);
       return OK;
     }
     return ERROR;
@@ -186,12 +216,12 @@ TipoRet BF (Sistema &s, char *nombreArchivo, int k){
     return ERROR;
   else{
     Sistema sisAUX = s;
-    if(sisAUX->d == NULL){
+    if(sisAUX->dir_act == NULL){
       return ERROR;
     }
     else{
       printf("1");
-      sisAUX->d = BFDirectorio(sisAUX->d, nombreArchivo, k);
+      sisAUX->dir_act= BFDirectorio(sisAUX->dir_act, nombreArchivo, k);
       return OK;
     }
   }

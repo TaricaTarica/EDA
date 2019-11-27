@@ -52,7 +52,7 @@ bool createDirectorio (directorio & d,char * parametro){
 	    char * auxPATH = new char [strlen(path) + 1];
 	    strcpy(auxPATH,path);
 	    directorio aux;
-	    directorio iter = d; //se que empieza en raiz, por eso apunto al hijo.	
+	    directorio iter = d; //se que empieza en raiz, por eso apunto al hijo.
 	    auxPATH = strtok (path,"/");
 		    while(auxPATH != NULL){
 			auxPATH = strtok (NULL,"/");
@@ -69,7 +69,7 @@ bool createDirectorio (directorio & d,char * parametro){
 			}
 			else{
 			  iter = iter ->hijo;
-			  while(iter != NULL){ 
+			  while(iter != NULL){
 			    while(iter->sig != NULL && (strcmp(iter->nombreDirectorio, auxPATH) != 0)){
 			      iter = iter->sig;
 			    }
@@ -98,7 +98,8 @@ bool createDirectorio (directorio & d,char * parametro){
 			    }
 			  }
 			}
-		      }
+		 }
+  return false;
 }
 
 
@@ -119,7 +120,7 @@ directorio busca_directorio(directorio d, char *parametro){
 
 //---------------------------------------------------------------------
 
-void print_Directorio(directorio d){
+/*void print_Directorio(directorio d){
   if(d != NULL){
     printf("  + %s", d->nombreDirectorio);
     printf("\n");
@@ -129,15 +130,36 @@ void print_Directorio(directorio d){
       printf("\t");
       printf("hijo de %s : ", d->nombreDirectorio);
       print_Directorio(d->hijo);
-	
+
     }
     if(d->sig != NULL){
       printf("\t");
       print_Directorio(d->sig);
     }
   }
-}
+}*/
 
+void print_Directorio(directorio d, int cont){
+  for (int auxcont = cont  ; auxcont > 0 ; auxcont --){
+    if (auxcont > 1){
+      printf ("\t");
+    }
+    else{
+      printf("└───────");
+    }
+  }
+  printf("► %s", d->nombreDirectorio);
+  printf("\n");
+  cont ++;
+  if (d->a != NULL){
+    print_Archivo(d->a, cont);
+  }
+  if (d->hijo != NULL){
+    print_Directorio (d->hijo, cont);
+  }
+  if (d->sig != NULL)
+    print_Directorio (d->sig, cont-1);
+}
 //---------------------------------------------------------------------
 
 directorio CreateArchivoDirectorio(directorio d, char *nombreArchivo, int tamanio){
@@ -181,25 +203,50 @@ directorio BFDirectorio(directorio d, char *nombreArchivo, int k){
 //---------------------------------------------------------------------
 
 directorio CDdir (directorio d, char*nombreDir){
-	directorio iter = d;
+directorio iter = d;
   char * pch = strtok(nombreDir, "/");
-	if(d != NULL){
+if(iter != NULL){
     while (pch != NULL)
     {
-      while ((iter != NULL) && (strcmp (pch, iter->nombreDirectorio) != 0))
-          iter = iter->hijo;
-      if (iter == NULL)
-        return d;
-      pch = strtok (NULL, "/");
-      if (pch != NULL)
-        iter = iter->sig;
+      pch = strtok (NULL,"/");
+      if(pch == NULL){
+        return iter;
+      }
+      else{
+        iter = iter->hijo;
+        while(pch != NULL){
+          while ((iter != NULL) && (strcmp (pch, iter->nombreDirectorio) != 0))
+            iter = iter->sig;
+          if ((iter != NULL) && (strcmp (pch, iter->nombreDirectorio) == 0)){
+            pch = strtok (NULL,"/");
+            if(pch != NULL){
+              iter = iter->hijo;
+            }
+            else{
+              return iter;
+            }
+          }
+          else{
+            while(pch != NULL)
+              pch = strtok (NULL,"/");
+            printf("!: No se encontró el directorio especificado\n");
+            return d;
+          }
+        }
+      }
     }
-    return iter;
   }
+  return d;
+} //mirá qué código papá
+
+//---------------------------------------------------------------------
+
+ directorio CDpadredir (directorio d){
+   if (d->padre != NULL)
+    return d->padre;
   else
     return d;
-}
-
+ }
 
 //---------------------------------------------------------------------
 bool DIRpertenece (directorio d, char * nombreDir){
@@ -217,18 +264,11 @@ char* get_nDirectorio(directorio d){
 }
 //---------------------------------------------------------------------
 void PWDir (directorio d, char * nombreDirectorio){
-  printf("%s/", get_nDirectorio(d));
-  while (d != NULL)
-  {
-    while ((d->hijo != NULL) && (strcmp (nombreDirectorio, d->nombreDirectorio) != 0)){
-        printf("ENTRO SEGUNDO WHILE");
-        d = d->hijo;
-        printf("%s/", get_nDirectorio(d));
-    }
-    d = d->sig;
+
+  if (d->padre != NULL){
+    PWDir(d->padre, nombreDirectorio);
   }
-    if(strcmp("raiz",nombreDirectorio) != 0)
-      printf("%s/", nombreDirectorio);
+  printf("/%s", d->nombreDirectorio);
 }
 
 //---------------------------------------------------------------------
@@ -260,13 +300,14 @@ bool RMDIR_dir(directorio &d, char* parametro){
 	    while(auxPATH != NULL){
 		auxPATH = strtok (NULL,"/");
 		if(auxPATH == NULL){
-		  soyHijo->padre = soyTuPadre;
-		  soyHijo->hijo = NULL;
-		  soyTuPadre->hijo = soyHijo;
-		  delete soyHijo;
-		  printf("-Directorio %s eliminado con exito\n", soyHijo->nombreDirectorio);
-		  soyHijo=NULL;
-		  soyTuPadre->hijo= NULL;
+		  soyHijo->sig = soyTuPadre->hijo->sig; //guardo el hermano
+			soyHijo->padre = soyTuPadre; //guardo al padre
+			soyTuPadre->hijo = soyHijo; //guardo al hijo actual (el que quiero eliminar)
+			printf("-Directorio %s eliminado con exito\n", soyHijo->nombreDirectorio);	
+			delete (soyHijo);		
+			soyHijo=NULL;
+			soyTuPadre->hijo=soyTuPadre->hijo->sig ;
+			return true;
 		}
 		else{
 		  soyTuPadre = soyTuPadre ->hijo;
@@ -275,19 +316,18 @@ bool RMDIR_dir(directorio &d, char* parametro){
 		      soyTuPadre = soyTuPadre->sig;
 		    }
 		    if(soyTuPadre != NULL && (strcmp(soyTuPadre->nombreDirectorio, auxPATH) == 0)){
-
 		      auxPATH = strtok (NULL,"/");
 		      if(auxPATH != NULL){
 			soyTuPadre = soyTuPadre->hijo;
 		      }
 		      else{
-			soyHijo->sig = NULL;
-			soyHijo->padre = soyTuPadre;
-			soyTuPadre->hijo = soyHijo;
+			soyHijo->sig = soyTuPadre->hijo->sig; //guardo el hermano
+			soyHijo->padre = soyTuPadre; //guardo al padre
+			soyTuPadre->hijo = soyHijo; //guardo al hijo actual (el que quiero eliminar)
 			printf("-Directorio %s eliminado con exito\n", soyHijo->nombreDirectorio);	
-			delete (soyHijo);
+			delete (soyHijo);		
 			soyHijo=NULL;
-			soyTuPadre->hijo= NULL;
+			soyTuPadre->hijo=soyTuPadre->hijo->sig ;
 			return true;
 		      }
 		   }
@@ -295,7 +335,6 @@ bool RMDIR_dir(directorio &d, char* parametro){
 		}
              }
 	      
-
+	return 0;
 }
-
 

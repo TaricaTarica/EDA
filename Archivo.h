@@ -12,7 +12,7 @@ typedef struct nodoArchivo * archivo;
 archivo insert_Archivo(archivo a, char *nArchivo, int tamanio);
 //crea el archivo a insertar en el Directorio
 
-void print_Archivo(archivo a);
+void print_Archivo(archivo a, int cont);
 //imprme el nombre de todos los archivos
 
 archivo buscaArchivo (archivo a, char *nombreArchivo);
